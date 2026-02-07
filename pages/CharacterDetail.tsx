@@ -211,7 +211,7 @@ const CharacterDetail: React.FC = () => {
                 </div>
              )}
 
-             {/* Episodes */}
+             {/* Episodes  */}
              <div className="border-t border-gray-800 pt-8">
                <div className="flex items-center mb-6 text-white">
                  <Tv className="w-6 h-6 mr-3 text-rm-neon" />
