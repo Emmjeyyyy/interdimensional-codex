@@ -10,10 +10,9 @@ interface CardProps {
   type: 'character' | 'location' | 'episode';
   image?: string;
   subtitle: string;
-  status?: string;
 }
 
-const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle, status }) => {
+const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
   const { isFavorite, toggleFavorite } = useFavorites();
   const favorited = isFavorite(id, type);
 
@@ -22,9 +21,6 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle, status }) 
     e.stopPropagation();
     toggleFavorite({ id, name, type, image, info: subtitle });
   };
-
-  const statusColor =
-    status === 'Alive' ? 'bg-rm-green' : status === 'Dead' ? 'bg-red-600' : 'bg-gray-500';
 
   return (
     <div className="group relative bg-black/60 border border-rm-green/40 rounded-xl overflow-hidden hover:border-rm-neon hover:shadow-[0_0_15px_rgba(20,240,60,0.3)] transition-all duration-300 flex flex-col h-full">
@@ -37,14 +33,6 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle, status }) 
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               loading="lazy"
             />
-            {status && (
-              <div className="absolute top-2 left-2 flex items-center bg-black/70 backdrop-blur-sm px-2 py-1 rounded-full border border-gray-700">
-                <span className={`w-2 h-2 rounded-full mr-2 ${statusColor} animate-pulse`} />
-                <span className="text-xs font-medium uppercase tracking-wide text-white">
-                  {status}
-                </span>
-              </div>
-            )}
           </div>
         ) : (
           <div className="h-32 bg-gradient-to-br from-rm-dark to-rm-green/20 flex items-center justify-center border-b border-rm-green/20">

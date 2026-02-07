@@ -96,7 +96,6 @@ const EpisodeDetail: React.FC = () => {
               type="character"
               image={char.image}
               subtitle={char.species}
-              status={char.status}
             />
           ))}
         </div>

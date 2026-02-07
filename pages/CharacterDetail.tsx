@@ -4,7 +4,7 @@ import { api } from '../services/api';
 import { Character, Episode } from '../types';
 import { DetailSkeleton } from '../components/Loading';
 import { useFavorites } from '../hooks/useFavorites';
-import { ArrowLeft, Heart, MapPin, Tv, Zap } from 'lucide-react';
+import { ArrowLeft, Heart, MapPin, Tv, Zap, Eye, EyeOff } from 'lucide-react';
 
 const CharacterDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -12,6 +12,7 @@ const CharacterDetail: React.FC = () => {
   const [episodes, setEpisodes] = useState<Episode[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [showStatus, setShowStatus] = useState(false);
   const { isFavorite, toggleFavorite } = useFavorites();
 
   useEffect(() => {
@@ -57,11 +58,28 @@ const CharacterDetail: React.FC = () => {
           {/* Image Section */}
           <div className="md:w-1/3 relative">
             <img src={character.image} alt={character.name} className="w-full h-full object-cover" />
-            <div className={`absolute top-4 left-4 px-3 py-1 rounded-full border border-black/20 text-xs font-bold uppercase tracking-wider text-white shadow-lg ${
-               character.status === 'Alive' ? 'bg-rm-green' : character.status === 'Dead' ? 'bg-red-600' : 'bg-gray-500'
-            }`}>
-              {character.status}
-            </div>
+            
+            <button
+              onClick={() => setShowStatus(!showStatus)}
+              className={`absolute top-4 left-4 px-3 py-1.5 rounded-full border border-black/20 text-xs font-bold uppercase tracking-wider text-white shadow-lg flex items-center transition-all duration-300 z-10 ${
+                 showStatus 
+                   ? (character.status === 'Alive' ? 'bg-rm-green' : character.status === 'Dead' ? 'bg-red-600' : 'bg-gray-500')
+                   : 'bg-black/60 backdrop-blur-md border-rm-green/30 hover:bg-black/80 hover:border-rm-neon'
+              }`}
+              title={showStatus ? "Hide status" : "Show status"}
+            >
+              {showStatus ? (
+                <>
+                  <EyeOff className="w-3.5 h-3.5 mr-2" />
+                  {character.status}
+                </>
+              ) : (
+                <>
+                  <Eye className="w-3.5 h-3.5 mr-2 text-rm-neon" />
+                  <span className="text-gray-300">Status Hidden</span>
+                </>
+              )}
+            </button>
           </div>
 
           {/* Info Section */}

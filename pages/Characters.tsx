@@ -97,7 +97,6 @@ const Characters: React.FC = () => {
                 type="character"
                 image={char.image}
                 subtitle={`${char.species} - ${char.gender}`}
-                status={char.status}
               />
             ))}
           </div>

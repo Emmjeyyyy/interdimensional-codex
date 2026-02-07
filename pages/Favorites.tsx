@@ -42,7 +42,6 @@ const Favorites: React.FC = () => {
                     type="character"
                     image={char.image}
                     subtitle={char.info}
-                    status={undefined} // We store limited info in favorites
                   />
                 ))}
               </div>
