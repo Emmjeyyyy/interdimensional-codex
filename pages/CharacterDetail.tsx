@@ -4,12 +4,14 @@ import { api } from '../services/api';
 import { Character, Episode } from '../types';
 import { CharacterDetailSkeleton } from '../components/Loading';
 import { useFavorites } from '../hooks/useFavorites';
-import { ArrowLeft, Heart, MapPin, Tv, Zap, Eye, EyeOff, Activity } from 'lucide-react';
+import { ArrowLeft, Heart, MapPin, Tv, Zap, Eye, EyeOff, Activity, Users } from 'lucide-react';
+import Card from '../components/Card';
 
 const CharacterDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [character, setCharacter] = useState<Character | null>(null);
   const [episodes, setEpisodes] = useState<Episode[]>([]);
+  const [versions, setVersions] = useState<Character[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showStatus, setShowStatus] = useState(false);
@@ -21,6 +23,7 @@ const CharacterDetail: React.FC = () => {
 
   const fetchDetail = async () => {
     setLoading(true);
+    setVersions([]);
     try {
       const charData = await api.getCharacterById(Number(id));
       setCharacter(charData);
@@ -35,6 +38,24 @@ const CharacterDetail: React.FC = () => {
         const episodesData = await api.getMultipleEpisodes(episodeIds);
         setEpisodes(episodesData);
       }
+
+      // Fetch versions (characters with the same name)
+      try {
+        const versionsData = await api.getCharacters({
+          name: charData.name,
+          page: 1,
+          status: '',
+          species: '',
+          gender: ''
+        });
+        // Filter out current character
+        const otherVersions = versionsData.results.filter(c => c.id !== charData.id);
+        setVersions(otherVersions);
+      } catch (vErr) {
+        // Versions fetch failed or no results (404), just ignore
+        setVersions([]);
+      }
+
     } catch (err) {
       setError("Failed to load character details.");
     } finally {
@@ -167,6 +188,28 @@ const CharacterDetail: React.FC = () => {
                    </div>
                 </div>
              </div>
+
+             {/* Versions */}
+             {versions.length > 0 && (
+                <div className="border-t border-gray-800 pt-8 mb-10">
+                   <div className="flex items-center mb-6 text-white">
+                     <Users className="w-6 h-6 mr-3 text-rm-neon" />
+                     <h2 className="text-2xl font-display font-bold">Versions ({versions.length})</h2>
+                   </div>
+                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {versions.map(ver => (
+                        <Card 
+                            key={ver.id}
+                            id={ver.id}
+                            name={ver.name}
+                            type="character"
+                            image={ver.image}
+                            subtitle={`${ver.species} - ${ver.status}`}
+                        />
+                      ))}
+                   </div>
+                </div>
+             )}
 
              {/* Episodes */}
              <div className="border-t border-gray-800 pt-8">
