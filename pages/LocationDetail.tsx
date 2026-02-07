@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { api } from '../services/api';
 import { Location, Character } from '../types';
-import { DetailSkeleton } from '../components/Loading';
+import { LocationEpisodeDetailSkeleton } from '../components/Loading';
 import { useFavorites } from '../hooks/useFavorites';
 import { ArrowLeft, Heart, Globe, Users } from 'lucide-react';
 import Card from '../components/Card';
@@ -43,7 +43,7 @@ const LocationDetail: React.FC = () => {
     }
   };
 
-  if (loading) return <DetailSkeleton />;
+  if (loading) return <LocationEpisodeDetailSkeleton />;
   if (error || !location) return <div className="text-center py-20 text-red-500 text-xl">{error}</div>;
 
   const favorited = isFavorite(location.id, 'location');

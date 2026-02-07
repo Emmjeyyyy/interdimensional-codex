@@ -2,16 +2,26 @@ import React from 'react';
 import { useFavorites } from '../hooks/useFavorites';
 import Card from '../components/Card';
 import { Heart, Ghost } from 'lucide-react';
+import { ListSkeleton } from '../components/Loading';
 
 const Favorites: React.FC = () => {
   const { favorites, isLoaded } = useFavorites();
+
+  if (!isLoaded) return (
+    <div>
+      <div className="flex items-center mb-8">
+        <h1 className="text-4xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          My Favorites
+        </h1>
+      </div>
+      <ListSkeleton />
+    </div>
+  );
 
   const hasFavorites = 
     favorites.characters.length > 0 || 
     favorites.locations.length > 0 || 
     favorites.episodes.length > 0;
-
-  if (!isLoaded) return null;
 
   return (
     <div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { api } from '../services/api';
 import { Character, Episode } from '../types';
-import { DetailSkeleton } from '../components/Loading';
+import { CharacterDetailSkeleton } from '../components/Loading';
 import { useFavorites } from '../hooks/useFavorites';
 import { ArrowLeft, Heart, MapPin, Tv, Zap, Eye, EyeOff, Activity } from 'lucide-react';
 
@@ -42,7 +42,7 @@ const CharacterDetail: React.FC = () => {
     }
   };
 
-  if (loading) return <DetailSkeleton />;
+  if (loading) return <CharacterDetailSkeleton />;
   if (error || !character) return <div className="text-center py-20 text-red-500 text-xl">{error}</div>;
 
   const favorited = isFavorite(character.id, 'character');
@@ -53,7 +53,7 @@ const CharacterDetail: React.FC = () => {
         <ArrowLeft className="w-4 h-4 mr-2" /> Back to Characters
       </Link>
 
-      <div className="bg-black/60 border border-rm-green/30 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,140,20,0.1)]">
+      <div className="bg-black border border-rm-green/30 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,140,20,0.1)]">
         <div className="md:flex">
           {/* Image Section */}
           <div className="md:w-1/3 relative">

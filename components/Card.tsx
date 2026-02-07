@@ -22,7 +22,7 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
   };
 
   return (
-    <div className="group relative bg-black/60 border border-rm-green/40 rounded-xl overflow-hidden hover:border-rm-neon hover:shadow-[0_0_15px_rgba(20,240,60,0.3)] transition-all duration-300 flex flex-col h-full">
+    <div className="group relative bg-black border border-rm-green/40 rounded-xl overflow-hidden hover:border-rm-neon hover:shadow-[0_0_15px_rgba(20,240,60,0.3)] transition-all duration-300 flex flex-col h-full">
       <Link to={`/${type}s/${id}`} className="flex flex-col h-full">
         {image && (
           <div className="relative aspect-square overflow-hidden">
