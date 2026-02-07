@@ -26,7 +26,12 @@ const App: React.FC = () => {
             <Route path="/favorites" element={<Favorites />} />
           </Routes>
         </main>
-        <footer className="bg-black/80 text-rm-green py-6 text-center border-t border-rm-green/30 backdrop-blur-sm relative z-10">
+        <footer className="bg-black/80 text-rm-green py-6 text-center border-t border-rm-green/30 backdrop-blur-sm relative z-10 flex flex-col items-center justify-center">
+          <img 
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Rick_and_Morty.svg/960px-Rick_and_Morty.svg.png?20220319060844" 
+            alt="Rick and Morty" 
+            className="h-8 w-auto mb-3 opacity-80"
+          />
           <p className="font-display tracking-wider text-sm">
             INTERDIMENSIONAL CODEX &copy; {new Date().getFullYear()}
           </p>

@@ -65,14 +65,6 @@ const Characters: React.FC = () => {
 
   return (
     <div>
-      <div className="flex justify-center items-center py-8 mb-4">
-        <img 
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Rick_and_Morty.svg/960px-Rick_and_Morty.svg.png?20220319060844" 
-          alt="Rick and Morty" 
-          className="w-full max-w-2xl h-auto object-contain"
-        />
-      </div>
-
       <h1 className="text-4xl font-display font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-rm-neon to-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
         Characters
       </h1>
