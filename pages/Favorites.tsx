@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFavorites } from '../hooks/useFavorites';
 import Card from '../components/Card';
-import { Heart, Ghost } from 'lucide-react';
+import { Ghost } from 'lucide-react';
 import { ListSkeleton } from '../components/Loading';
 
 const Favorites: React.FC = () => {
@@ -10,7 +10,7 @@ const Favorites: React.FC = () => {
   if (!isLoaded) return (
     <div>
       <div className="flex items-center mb-8">
-        <h1 className="text-4xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+        <h1 className="text-4xl font-display font-bold text-rm-neon drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
           My Favorites
         </h1>
       </div>
@@ -26,10 +26,9 @@ const Favorites: React.FC = () => {
   return (
     <div>
        <div className="flex items-center mb-8">
-        <h1 className="text-4xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-pink-500 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+        <h1 className="text-4xl font-display font-bold text-rm-neon drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
           My Favorites
         </h1>
-        <Heart className="ml-4 text-red-500 fill-red-500 animate-pulse-slow w-8 h-8" />
        </div>
 
       {!hasFavorites ? (
