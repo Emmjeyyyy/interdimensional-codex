@@ -33,44 +33,45 @@ export const CharacterDetailSkeleton: React.FC = () => {
     <div className="max-w-5xl mx-auto w-full animate-fade-in">
       <div className="h-5 w-32 bg-gray-800/50 rounded mb-6 animate-pulse-slow motion-reduce:animate-none" />
       
-      <div className="bg-black border border-rm-green/30 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,140,20,0.1)] relative min-h-[400px]">
-         <div className="md:flex h-full animate-pulse-slow motion-reduce:animate-none motion-reduce:opacity-50">
-            <div className="md:w-1/3 bg-gray-800/50 h-80 md:h-auto" />
-            <div className="md:w-2/3 p-8 space-y-6">
-               <div className="flex justify-between items-start">
-                  <div className="h-10 bg-gray-800/50 rounded w-2/3" />
-                  <div className="h-12 w-12 rounded-full bg-gray-800/50" />
-               </div>
-               
-               <div className="space-y-6 mt-8">
-                  <div className="flex items-center">
-                     <div className="w-5 h-5 rounded bg-gray-800/50 mr-3" />
-                     <div className="h-5 bg-gray-800/50 rounded w-1/2" />
-                  </div>
-                  <div className="flex items-center">
-                     <div className="w-5 h-5 rounded bg-gray-800/50 mr-3" />
-                     <div className="h-5 bg-gray-800/50 rounded w-1/2" />
-                  </div>
-                  <div className="flex items-center">
-                     <div className="w-5 h-5 rounded bg-gray-800/50 mr-3" />
-                     <div className="h-5 bg-gray-800/50 rounded w-2/3" />
-                  </div>
-                  <div className="flex items-center">
-                     <div className="w-5 h-5 rounded bg-gray-800/50 mr-3" />
-                     <div className="h-5 bg-gray-800/50 rounded w-2/3" />
-                  </div>
-               </div>
+      <div className="bg-black border border-rm-green/30 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,140,20,0.1)] relative min-h-[600px]">
+         {/* Banner */}
+         <div className="h-48 bg-gray-900/50 animate-pulse-slow"></div>
 
-               <div className="pt-6 border-t border-gray-800/50 mt-8">
-                  <div className="h-6 bg-gray-800/50 rounded w-1/4 mb-4" />
-                  <div className="flex flex-wrap gap-2">
-                     <div className="h-8 w-24 bg-gray-800/50 rounded" />
-                     <div className="h-8 w-32 bg-gray-800/50 rounded" />
-                     <div className="h-8 w-20 bg-gray-800/50 rounded" />
-                  </div>
+         <div className="px-6 md:px-10 pb-10">
+            {/* Avatar Header */}
+            <div className="flex flex-col items-center -mt-24 mb-10 relative">
+               <div className="w-48 h-48 rounded-full bg-black border-4 border-black p-1">
+                  <div className="w-full h-full rounded-full bg-gray-800/80 animate-pulse-slow"></div>
+               </div>
+               <div className="mt-6 space-y-3 flex flex-col items-center w-full">
+                  <div className="h-10 bg-gray-800/50 rounded w-1/2 md:w-1/3 animate-pulse-slow" />
+                  <div className="h-10 w-40 rounded-full bg-gray-800/50 animate-pulse-slow" />
+               </div>
+            </div>
+            
+            {/* Grid */}
+            <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+               <div className="space-y-6">
+                  <div className="h-24 bg-gray-800/30 rounded-xl animate-pulse-slow"></div>
+                  <div className="h-24 bg-gray-800/30 rounded-xl animate-pulse-slow"></div>
+               </div>
+               <div className="space-y-6">
+                  <div className="h-24 bg-gray-800/30 rounded-xl animate-pulse-slow"></div>
+                  <div className="h-24 bg-gray-800/30 rounded-xl animate-pulse-slow"></div>
+               </div>
+            </div>
+
+            {/* Episodes */}
+            <div className="max-w-4xl mx-auto pt-6 border-t border-gray-800/50">
+               <div className="h-8 w-40 bg-gray-800/50 rounded mb-4 animate-pulse-slow" />
+               <div className="flex flex-wrap gap-2">
+                  {Array.from({ length: 12 }).map((_, i) => (
+                    <div key={i} className="h-10 w-24 bg-gray-800/30 rounded animate-pulse-slow" />
+                  ))}
                </div>
             </div>
          </div>
+         
          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-[shimmer_2s_infinite] motion-reduce:hidden pointer-events-none" />
       </div>
     </div>
