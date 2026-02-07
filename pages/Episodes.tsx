@@ -90,7 +90,7 @@ const Episodes: React.FC = () => {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-4xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-rm-neon to-white">
+        <h1 className="text-4xl font-display font-bold text-rm-neon">
           {selectedSeason && !isSearchActive ? SEASONS.find(s => s.code === selectedSeason)?.name : 'Episodes'}
         </h1>
         {selectedSeason && !isSearchActive && (
