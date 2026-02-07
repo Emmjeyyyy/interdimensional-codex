@@ -16,24 +16,25 @@ const Characters: React.FC = () => {
   
   // Filters
   const [name, setName] = useState('');
-  const [status, setStatus] = useState('');
-  const [gender, setGender] = useState('');
+  const [species, setSpecies] = useState('');
 
   // Debounce search
   const [debouncedName, setDebouncedName] = useState(name);
+  const [debouncedSpecies, setDebouncedSpecies] = useState(species);
 
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedName(name);
+      setDebouncedSpecies(species);
       setPage(1); // Reset to page 1 on filter change
     }, 500);
     return () => clearTimeout(handler);
-  }, [name, status, gender]);
+  }, [name, species]);
 
   useEffect(() => {
     fetchCharacters();
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [page, debouncedName, status, gender]);
+  }, [page, debouncedName, debouncedSpecies]);
 
   const fetchCharacters = async () => {
     setLoading(true);
@@ -42,9 +43,9 @@ const Characters: React.FC = () => {
       const data = await api.getCharacters({
         page,
         name: debouncedName,
-        status,
-        gender,
-        species: ''
+        status: '',
+        gender: '',
+        species: debouncedSpecies
       });
       setCharacters(data.results);
       setTotalPages(data.info.pages);
@@ -69,8 +70,7 @@ const Characters: React.FC = () => {
       
       <CharacterFilters 
         search={name} setSearch={setName}
-        status={status} setStatus={setStatus}
-        gender={gender} setGender={setGender}
+        species={species} setSpecies={setSpecies}
       />
 
       {loading ? (
@@ -80,7 +80,7 @@ const Characters: React.FC = () => {
           <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
           <p className="text-xl text-gray-300">{error}</p>
           <button 
-            onClick={() => { setName(''); setStatus(''); setGender(''); }}
+            onClick={() => { setName(''); setSpecies(''); }}
             className="mt-4 text-rm-neon hover:underline"
           >
             Clear filters
