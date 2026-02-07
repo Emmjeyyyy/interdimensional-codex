@@ -52,8 +52,9 @@ const Characters: React.FC = () => {
     } catch (err: any) {
       setCharacters([]);
       setTotalPages(0);
-      if (err.message.includes("404")) {
-        setError("No characters found matching your filters.");
+      // Check for 404 (standard) or "Not Found" (common statusText)
+      if (err.message.includes("404") || err.message.includes("Not Found")) {
+        setError("No characters found.");
       } else {
         setError("Failed to load characters. Please try again.");
       }
