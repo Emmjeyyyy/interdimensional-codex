@@ -4,7 +4,7 @@ import { api } from '../services/api';
 import { Character, Episode } from '../types';
 import { DetailSkeleton } from '../components/Loading';
 import { useFavorites } from '../hooks/useFavorites';
-import { ArrowLeft, Heart, MapPin, Tv, Zap, Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, Heart, MapPin, Tv, Zap, Eye, EyeOff, Activity } from 'lucide-react';
 
 const CharacterDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -58,28 +58,6 @@ const CharacterDetail: React.FC = () => {
           {/* Image Section */}
           <div className="md:w-1/3 relative">
             <img src={character.image} alt={character.name} className="w-full h-full object-cover" />
-            
-            <button
-              onClick={() => setShowStatus(!showStatus)}
-              className={`absolute top-4 left-4 px-3 py-1.5 rounded-full border border-black/20 text-xs font-bold uppercase tracking-wider text-white shadow-lg flex items-center transition-all duration-300 z-10 ${
-                 showStatus 
-                   ? (character.status === 'Alive' ? 'bg-rm-green' : character.status === 'Dead' ? 'bg-red-600' : 'bg-gray-500')
-                   : 'bg-black/60 backdrop-blur-md border-rm-green/30 hover:bg-black/80 hover:border-rm-neon'
-              }`}
-              title={showStatus ? "Hide status" : "Show status"}
-            >
-              {showStatus ? (
-                <>
-                  <EyeOff className="w-3.5 h-3.5 mr-2" />
-                  {character.status}
-                </>
-              ) : (
-                <>
-                  <Eye className="w-3.5 h-3.5 mr-2 text-rm-neon" />
-                  <span className="text-gray-300">Status Hidden</span>
-                </>
-              )}
-            </button>
           </div>
 
           {/* Info Section */}
@@ -102,6 +80,31 @@ const CharacterDetail: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="space-y-4">
+                
+                <div className="flex items-center text-gray-300">
+                  <Activity className="w-5 h-5 mr-3 text-rm-neon" />
+                  <div>
+                    <span className="block text-xs text-gray-500 uppercase tracking-wider">Status</span>
+                    <button
+                      onClick={() => setShowStatus(!showStatus)}
+                      className="flex items-center space-x-2 focus:outline-none group mt-1"
+                    >
+                      <span className={`text-lg font-medium transition-colors ${
+                        showStatus 
+                          ? (character.status === 'Alive' ? 'text-rm-green' : character.status === 'Dead' ? 'text-red-500' : 'text-gray-400')
+                          : 'text-white group-hover:text-rm-neon'
+                      }`}>
+                        {showStatus ? character.status : 'Reveal Status'}
+                      </span>
+                      {showStatus ? (
+                        <EyeOff className="w-4 h-4 text-gray-500 ml-2" />
+                      ) : (
+                        <Eye className="w-4 h-4 text-rm-neon ml-2 animate-pulse" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+
                 <div className="flex items-center text-gray-300">
                   <Zap className="w-5 h-5 mr-3 text-rm-neon" />
                   <div>
@@ -109,6 +112,7 @@ const CharacterDetail: React.FC = () => {
                     <span className="text-lg font-medium">{character.species} ({character.gender})</span>
                   </div>
                 </div>
+
                 <div className="flex items-center text-gray-300">
                   <MapPin className="w-5 h-5 mr-3 text-rm-neon" />
                   <div>
@@ -122,6 +126,7 @@ const CharacterDetail: React.FC = () => {
                     )}
                   </div>
                 </div>
+
                 <div className="flex items-center text-gray-300">
                   <MapPin className="w-5 h-5 mr-3 text-rm-neon" />
                   <div>

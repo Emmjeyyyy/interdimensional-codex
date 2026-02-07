@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Heart } from 'lucide-react';
-import { FavoriteItem } from '../types';
 import { useFavorites } from '../hooks/useFavorites';
 
 interface CardProps {
@@ -25,7 +24,7 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
   return (
     <div className="group relative bg-black/60 border border-rm-green/40 rounded-xl overflow-hidden hover:border-rm-neon hover:shadow-[0_0_15px_rgba(20,240,60,0.3)] transition-all duration-300 flex flex-col h-full">
       <Link to={`/${type}s/${id}`} className="flex flex-col h-full">
-        {image ? (
+        {image && (
           <div className="relative aspect-square overflow-hidden">
             <img
               src={image}
@@ -34,20 +33,20 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
               loading="lazy"
             />
           </div>
-        ) : (
-          <div className="h-32 bg-gradient-to-br from-rm-dark to-rm-green/20 flex items-center justify-center border-b border-rm-green/20">
-            <span className="text-4xl opacity-20 font-display">RM</span>
-          </div>
         )}
 
-        <div className="p-4 flex flex-col flex-grow">
-          <h3 className="font-display font-bold text-lg text-white mb-1 truncate group-hover:text-rm-neon transition-colors">
-            {name}
-          </h3>
-          <p className="text-sm text-gray-400 font-medium mb-4">{subtitle}</p>
+        <div className={`flex flex-col flex-grow ${image ? 'p-4' : 'p-5'}`}>
+          {/* Title Container - Add padding right when no image to prevent overlap with absolute heart button */}
+          <div className={`flex justify-between items-start mb-2 ${!image ? 'pr-10' : ''}`}>
+            <h3 className="font-display font-bold text-lg text-white mb-1 truncate group-hover:text-rm-neon transition-colors w-full">
+              {name}
+            </h3>
+          </div>
+          
+          <p className="text-sm text-gray-400 font-medium mb-4 line-clamp-2">{subtitle}</p>
           
           <div className="mt-auto flex justify-between items-center">
-            <span className="text-xs text-rm-teal uppercase tracking-widest font-bold">
+            <span className="text-xs text-rm-teal uppercase tracking-widest font-bold group-hover:underline">
               Details &rarr;
             </span>
           </div>
@@ -56,7 +55,9 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
 
       <button
         onClick={handleFavoriteClick}
-        className="absolute top-2 right-2 p-2 rounded-full bg-black/60 backdrop-blur-sm text-white hover:bg-rm-neon hover:text-black transition-all duration-200 z-10 border border-white/10"
+        className={`absolute rounded-full bg-black/60 backdrop-blur-sm text-white hover:bg-rm-neon hover:text-black transition-all duration-200 z-10 border border-white/10 ${
+          image ? 'top-2 right-2 p-2' : 'top-4 right-4 p-2'
+        }`}
         aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
       >
         <Heart
