@@ -1,0 +1,5 @@
+{
+  "name": "Interdimensional Codex",
+  "description": "A comprehensive wiki for Rick and Morty characters, locations, and episodes using the public API. Features a neon sci-fi design, favorites system, and responsive layout.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interdimensional Codex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              rm: {
+                dark: '#001400',
+                black: '#000000',
+                green: '#008C14',
+                neon: '#14F03C',
+                teal: '#14DC3C',
+              }
+            },
+            fontFamily: {
+              sans: ['Roboto', 'sans-serif'],
+              display: ['Orbitron', 'sans-serif'],
+            },
+            animation: {
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #000000;
+        color: white;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #001400;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #008C14;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #14F03C;
+      }
+      
+      /* Starry Background Utility - Randomized Fixed Box Shadows */
+      .bg-space {
+        background-color: #000000;
+        position: relative;
+      }
+      
+      /* Small Stars (1px) */
+      .bg-space::before {
+        content: " ";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 1px;
+        height: 1px;
+        background: transparent;
+        box-shadow: 
+          12vw 5vh #fff, 85vw 12vh #ccc, 34vw 45vh #fff, 76vw 89vh #aaa, 5vw 95vh #fff,
+          43vw 23vh #888, 92vw 67vh #fff, 18vw 34vh #ddd, 65vw 56vh #fff, 29vw 82vh #ccc,
+          55vw 12vh #fff, 11vw 76vh #999, 98vw 34vh #fff, 23vw 91vh #eee, 45vw 55vh #fff,
+          67vw 23vh #aaa, 32vw 45vh #fff, 87vw 12vh #bbb, 9vw 67vh #fff, 54vw 89vh #ddd,
+          21vw 34vh #fff, 78vw 56vh #ccc, 13vw 98vh #fff, 91vw 23vh #888, 34vw 67vh #fff,
+          56vw 89vh #eee, 12vw 45vh #fff, 89vw 76vh #aaa, 23vw 12vh #fff, 67vw 34vh #bbb,
+          45vw 98vh #fff, 89vw 23vh #ccc, 34vw 56vh #fff, 12vw 78vh #ddd, 67vw 91vh #fff,
+          23vw 45vh #aaa, 78vw 12vh #fff, 45vw 67vh #ccc, 91vw 89vh #fff, 12vw 23vh #888,
+          56vw 34vh #fff, 89vw 56vh #eee, 23vw 78vh #fff, 67vw 12vh #bbb, 34vw 91vh #fff,
+          12vw 45vh #ddd, 78vw 67vh #fff, 45vw 89vh #aaa, 91vw 12vh #fff, 23vw 34vh #ccc,
+          37vw 18vh #fff, 82vw 41vh #aaa, 15vw 62vh #fff, 69vw 94vh #888, 28vw 33vh #fff,
+          51vw 75vh #ccc, 93vw 7vh #fff, 4vw 86vh #ddd, 61vw 29vh #fff, 26vw 53vh #aaa,
+          88vw 81vh #fff, 47vw 4vh #bbb, 73vw 66vh #fff, 19vw 39vh #aaa, 59vw 92vh #fff,
+          6vw 16vh #ccc, 33vw 71vh #fff, 77vw 25vh #eee, 52vw 48vh #fff, 96vw 85vh #aaa,
+          2vw 8vh #fff, 99vw 2vh #888, 14vw 22vh #fff, 50vw 50vh #fff, 38vw 72vh #ccc;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* Medium Stars (2px) - Fewer, brighter */
+      .bg-space::after {
+        content: " ";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 2px;
+        height: 2px;
+        background: transparent;
+        box-shadow: 
+          8vw 25vh #fff, 94vw 82vh #ccc, 31vw 64vh #fff, 57vw 11vh #ddd, 72vw 48vh #fff,
+          24vw 93vh #aaa, 49vw 36vh #fff, 86vw 59vh #eee, 16vw 8vh #fff, 63vw 77vh #ccc,
+          39vw 21vh #fff, 81vw 96vh #aaa, 53vw 42vh #fff, 5vw 68vh #ddd, 28vw 54vh #fff,
+          91vw 14vh #bbb, 66vw 87vh #fff, 19vw 32vh #ccc, 75vw 63vh #fff, 42vw 5vh #eee,
+          83vw 33vh #fff, 3vw 52vh #ccc, 27vw 88vh #fff, 61vw 19vh #aaa, 46vw 74vh #fff;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.8;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
