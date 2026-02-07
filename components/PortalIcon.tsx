@@ -27,6 +27,6 @@ export const PortalIcon: React.FC<{ className?: string }> = ({ className = "w-10
       strokeWidth="12" 
       strokeLinecap="round"
     />
-    <circle cx="128" cy="128" r="20" fill="#14F03C" className="animate-pulse"/>
+    <circle cx="128" cy="128" r="20" fill="#14F03C" />
   </svg>
 );

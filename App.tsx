@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Characters from './pages/Characters';
 import Locations from './pages/Locations';
@@ -16,7 +16,7 @@ const App: React.FC = () => {
         <Navbar />
         <main className="flex-grow container mx-auto px-4 py-8 relative z-10">
           <Routes>
-            <Route path="/" element={<Navigate to="/characters" replace />} />
+            <Route path="/" element={<Characters />} />
             <Route path="/characters" element={<Characters />} />
             <Route path="/characters/:id" element={<CharacterDetail />} />
             <Route path="/locations" element={<Locations />} />

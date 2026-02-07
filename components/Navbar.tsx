@@ -18,9 +18,9 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <NavLink to="/" className="flex items-center space-x-3 group">
-            <PortalIcon className="w-10 h-10 group-hover:drop-shadow-[0_0_8px_rgba(20,240,60,0.8)] transition-all duration-300" />
-            <span className="font-display font-bold text-xl md:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-rm-neon to-rm-teal drop-shadow-[0_0_5px_rgba(20,240,60,0.8)] group-hover:drop-shadow-[0_0_10px_rgba(20,240,60,1)] transition-all duration-300">
+          <NavLink to="/" className="flex items-center space-x-3">
+            <PortalIcon className="w-10 h-10" />
+            <span className="font-display font-bold text-xl md:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-rm-neon to-rm-teal drop-shadow-[0_0_2px_rgba(20,240,60,0.5)]">
               INTERDIMENSIONAL CODEX
             </span>
           </NavLink>
