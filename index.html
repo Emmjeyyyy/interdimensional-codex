@@ -59,14 +59,15 @@
         position: relative;
       }
       
-      /* Small Stars (1px) */
+      /* Small Stars (2px) */
       .bg-space::before {
         content: " ";
         position: fixed;
         top: 0;
         left: 0;
-        width: 1px;
-        height: 1px;
+        width: 2px;
+        height: 2px;
+        border-radius: 50%;
         background: transparent;
         box-shadow: 
           12vw 5vh #fff, 85vw 12vh #ccc, 34vw 45vh #fff, 76vw 89vh #aaa, 5vw 95vh #fff,
@@ -88,14 +89,15 @@
         pointer-events: none;
       }
 
-      /* Medium Stars (2px) - Fewer, brighter */
+      /* Medium Stars (3px) - Fewer, brighter */
       .bg-space::after {
         content: " ";
         position: fixed;
         top: 0;
         left: 0;
-        width: 2px;
-        height: 2px;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
         background: transparent;
         box-shadow: 
           8vw 25vh #fff, 94vw 82vh #ccc, 31vw 64vh #fff, 57vw 11vh #ddd, 72vw 48vh #fff,
