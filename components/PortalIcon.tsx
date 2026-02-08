@@ -13,7 +13,6 @@ export const PortalIcon: React.FC<{ className?: string }> = ({ className = "w-10
         <feComposite in="SourceGraphic" in2="blur" operator="over"/>
       </filter>
     </defs>
-    <rect width="256" height="256" rx="60" fill="#000000"/>
     <path 
       d="M128 46C173.287 46 210 82.7127 210 128C210 173.287 173.287 210 128 210C82.7127 210 46 173.287 46 128C46 99.5 59.5 74.5 80 59" 
       stroke="#58a6ff" 

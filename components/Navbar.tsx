@@ -22,19 +22,16 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-sci-panel border-b-4 border-sci-frame shadow-2xl z-50 sticky top-0">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-stretch h-24">
+        <div className="flex justify-between items-center h-24">
           {/* Logo Section */}
           <div className="flex items-center">
-            <NavLink to="/" className="flex items-center space-x-4">
-              <div className="relative w-14 h-14 bg-sci-screen border-2 border-sci-frame rounded-lg flex items-center justify-center overflow-hidden shadow-[0_0_15px_rgba(88,166,255,0.2)]">
-                 <div className="absolute inset-0 bg-sci-accent/10 scanlines"></div>
-                 <PortalIcon className="w-9 h-9 text-sci-accent drop-shadow-[0_0_5px_rgba(88,166,255,0.8)]" />
-              </div>
-              <div className="flex flex-col">
+            <NavLink to="/" className="flex items-center space-x-2">
+              <PortalIcon className="w-16 h-16 text-sci-accent drop-shadow-[0_0_5px_rgba(88,166,255,0.8)]" />
+              <div className="flex flex-col justify-center mt-1">
                 <span className="font-display font-black text-2xl text-sci-accent tracking-wider leading-none text-glow">
                   INTERDIMENSIONAL CODEX
                 </span>
-                <span className="text-xs uppercase tracking-[0.4em] text-sci-text">
+                <span className="text-xs uppercase tracking-[0.4em] text-sci-text mt-1">
                   classified database
                 </span>
               </div>
