@@ -25,17 +25,17 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-stretch h-24">
           {/* Logo Section */}
           <div className="flex items-center">
-            <NavLink to="/" className="flex items-center space-x-4 group">
-              <div className="relative w-14 h-14 bg-sci-screen border-2 border-sci-frame rounded-lg flex items-center justify-center overflow-hidden shadow-[0_0_15px_rgba(88,166,255,0.2)] group-hover:shadow-[0_0_25px_rgba(88,166,255,0.4)] transition-all duration-300">
+            <NavLink to="/" className="flex items-center space-x-4">
+              <div className="relative w-14 h-14 bg-sci-screen border-2 border-sci-frame rounded-lg flex items-center justify-center overflow-hidden shadow-[0_0_15px_rgba(88,166,255,0.2)]">
                  <div className="absolute inset-0 bg-sci-accent/10 scanlines"></div>
-                 <PortalIcon className="w-9 h-9 text-sci-accent group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_5px_rgba(88,166,255,0.8)]" />
+                 <PortalIcon className="w-9 h-9 text-sci-accent drop-shadow-[0_0_5px_rgba(88,166,255,0.8)]" />
               </div>
               <div className="flex flex-col">
-                <span className="font-display font-black text-2xl text-sci-accent tracking-wider leading-none text-glow group-hover:text-white transition-colors">
-                  CODEX
+                <span className="font-display font-black text-2xl text-sci-accent tracking-wider leading-none text-glow">
+                  INTERDIMENSIONAL CODEX
                 </span>
-                <span className="text-[0.6rem] uppercase tracking-[0.4em] text-sci-text group-hover:text-sci-accent transition-colors">
-                  Interdimensional
+                <span className="text-xs uppercase tracking-[0.4em] text-sci-text">
+                  classified database
                 </span>
               </div>
             </NavLink>
