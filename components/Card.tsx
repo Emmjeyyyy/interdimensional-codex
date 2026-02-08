@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Crosshair, Activity, Globe } from 'lucide-react';
+import { Crosshair, Activity } from 'lucide-react';
 import { useFavorites } from '../hooks/useFavorites';
+import { PlanetIcon } from './PlanetIcon';
 
 interface CardProps {
   id: number;
@@ -56,7 +57,7 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
             <div className="flex-grow flex flex-col justify-center text-center space-y-3">
                  {type === 'location' && (
                     <div className="flex justify-center">
-                        <Globe className="w-12 h-12 text-sci-accent opacity-60" strokeWidth={1.5} />
+                        <PlanetIcon className="w-15 h-15 text-sci-accent opacity-60" />
                     </div>
                  )}
                  <h3 className="font-display font-bold text-lg text-sci-accent uppercase group-hover:text-white transition-colors leading-tight break-words">

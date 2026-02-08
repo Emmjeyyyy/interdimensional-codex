@@ -4,7 +4,8 @@ import { api } from '../services/api';
 import { Location, Character } from '../types';
 import { LocationEpisodeDetailSkeleton } from '../components/Loading';
 import { useFavorites } from '../hooks/useFavorites';
-import { ArrowLeft, Crosshair, Globe, Users, Radar } from 'lucide-react';
+import { ArrowLeft, Crosshair, Users, Radar } from 'lucide-react';
+import { PlanetIcon } from '../components/PlanetIcon';
 import Card from '../components/Card';
 
 const LocationDetail: React.FC = () => {
@@ -64,7 +65,7 @@ const LocationDetail: React.FC = () => {
 
         <div className="p-8 relative">
             <div className="absolute right-10 top-10 opacity-10">
-                <Globe className="w-40 h-40 text-sci-accent animate-pulse" />
+                <PlanetIcon className="w-40 h-40 text-sci-accent animate-pulse" />
             </div>
 
             <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-6">

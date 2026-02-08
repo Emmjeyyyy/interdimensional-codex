@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, Crosshair, Terminal, Map, Radio } from 'lucide-react';
+import { Menu, X, Crosshair, Terminal, Radio } from 'lucide-react';
 import { PortalIcon } from './PortalIcon';
+import { PlanetIcon } from './PlanetIcon';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +10,7 @@ const Navbar: React.FC = () => {
 
   const navItems = [
     { name: 'Subjects', path: '/characters', icon: <Terminal className="w-4 h-4" /> },
-    { name: 'Sectors', path: '/locations', icon: <Map className="w-4 h-4" /> },
+    { name: 'Sectors', path: '/locations', icon: <PlanetIcon className="w-4 h-4" /> },
     { name: 'Logs', path: '/episodes', icon: <Radio className="w-4 h-4" /> },
     { name: 'Saved', path: '/favorites', icon: <Crosshair className="w-4 h-4" /> },
   ];
