@@ -105,19 +105,42 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
         {/* CRT Screen Container - Responsive Height */}
         <div className="relative bg-sci-screen border-4 border-sci-panel rounded-lg mb-2 overflow-hidden shadow-crt-inset h-48 sm:h-64 flex flex-col items-center justify-center transition-all">
           
-          {/* Scanlines & Glare Overlay */}
-          <div className="absolute inset-0 z-20 pointer-events-none scanlines opacity-50 mix-blend-overlay"></div>
-          <div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-b from-white/5 to-transparent h-1/3 opacity-30"></div>
+          {/* Scanlines & Glare Overlay - Now on top of everything via z-index */}
+          <div className="absolute inset-0 z-40 pointer-events-none scanlines opacity-50 mix-blend-overlay"></div>
+          <div className="absolute inset-0 z-40 pointer-events-none bg-gradient-to-b from-white/5 to-transparent h-1/3 opacity-30"></div>
           
           {image ? (
-            <div className="w-full h-full relative">
+            <div className="w-full h-full relative overflow-hidden">
+               {/* Main Image */}
                <img
                 src={image}
                 alt={name}
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300 filter sepia-[0.3] contrast-125"
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300 filter sepia-[0.3] contrast-125 relative z-10"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-sci-accent/20 mix-blend-color opacity-30 pointer-events-none"></div>
+              
+              {/* Chromatic Aberration: Red Channel (Left Offset) */}
+               <div 
+                 className="absolute inset-0 w-full h-full bg-cover bg-center opacity-30 mix-blend-screen pointer-events-none z-20"
+                 style={{ 
+                   backgroundImage: `url(${image})`, 
+                   transform: 'translateX(-2px)',
+                   filter: 'sepia(1) saturate(4) hue-rotate(-50deg)'
+                 }} 
+               />
+
+               {/* Chromatic Aberration: Cyan/Blue Channel (Right Offset) */}
+               <div 
+                 className="absolute inset-0 w-full h-full bg-cover bg-center opacity-30 mix-blend-screen pointer-events-none z-20"
+                 style={{ 
+                   backgroundImage: `url(${image})`, 
+                   transform: 'translateX(2px)',
+                   filter: 'sepia(1) saturate(4) hue-rotate(130deg)'
+                 }} 
+               />
+
+               {/* Tint Overlay */}
+              <div className="absolute inset-0 bg-sci-accent/20 mix-blend-color opacity-30 pointer-events-none z-30"></div>
             </div>
           ) : (
              <div className="w-full h-full flex flex-col items-center justify-center text-sci-frameLight p-6 text-center">
@@ -127,7 +150,7 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
           )}
 
           {/* Status Indicator inside screen */}
-          <div className="absolute top-3 left-3 z-30 flex items-center space-x-2">
+          <div className="absolute top-3 left-3 z-50 flex items-center space-x-2">
              <div className={`w-2 h-2 rounded-full ${favorited ? 'bg-sci-danger shadow-[0_0_8px_rgba(248,81,73,1)]' : 'bg-sci-success/50'}`}></div>
              <span className="text-[0.5rem] uppercase text-sci-text tracking-widest font-mono">REC-{id.toString().padStart(4, '0')}</span>
           </div>
@@ -135,7 +158,7 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
           {/* Favorite Button (Hardware switch style) */}
           <button
             onClick={handleFavoriteClick}
-            className={`absolute top-2 right-2 z-30 p-1.5 border border-sci-text/30 bg-black/60 transition-colors ${
+            className={`absolute top-2 right-2 z-50 p-1.5 border border-sci-text/30 bg-black/60 transition-colors ${
               favorited ? 'text-sci-danger border-sci-danger' : 'text-sci-text hover:text-sci-danger hover:border-sci-danger'
             }`}
             aria-label={favorited ? "Remove from favorites" : "Add to favorites"}

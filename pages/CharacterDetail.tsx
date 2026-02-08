@@ -80,11 +80,6 @@ const CharacterDetail: React.FC = () => {
         {/* Header Bar */}
         <div className="bg-sci-frame border-b border-sci-frameLight px-4 py-2 md:px-6 md:py-3 flex justify-between items-center">
              <div className="font-mono text-[0.6rem] md:text-xs text-sci-text uppercase tracking-[0.2em]">Subject Dossier #{character.id}</div>
-             <div className="flex gap-2">
-                 <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-sci-danger animate-pulse"></div>
-                 <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-sci-accent opacity-50"></div>
-                 <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-sci-success opacity-50"></div>
-             </div>
         </div>
 
         <div className="p-5 md:p-10 flex flex-col lg:flex-row gap-6 lg:gap-10">
