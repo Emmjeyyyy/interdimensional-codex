@@ -4,7 +4,7 @@ import { api } from '../services/api';
 import { Location, Character } from '../types';
 import { LocationEpisodeDetailSkeleton } from '../components/Loading';
 import { useFavorites } from '../hooks/useFavorites';
-import { ArrowLeft, Heart, Globe, Users, Radar } from 'lucide-react';
+import { ArrowLeft, Crosshair, Globe, Users, Radar } from 'lucide-react';
 import Card from '../components/Card';
 
 const LocationDetail: React.FC = () => {
@@ -95,7 +95,7 @@ const LocationDetail: React.FC = () => {
                         : 'bg-sci-base border-sci-frame text-sci-text hover:text-white hover:border-sci-accent'
                     }`}
                 >
-                    <Heart className={`w-4 h-4 mr-2 ${favorited ? 'fill-current' : ''}`} />
+                    <Crosshair className={`w-4 h-4 mr-2`} />
                     {favorited ? 'Sector Marked' : 'Mark Sector'}
                 </button>
             </div>

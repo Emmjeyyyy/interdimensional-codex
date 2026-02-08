@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Activity } from 'lucide-react';
+import { Crosshair, Activity } from 'lucide-react';
 import { useFavorites } from '../hooks/useFavorites';
 
 interface CardProps {
@@ -48,7 +48,7 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
                     }`}
                     aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
                 >
-                    <Heart className={`w-3.5 h-3.5 ${favorited ? 'fill-current' : ''}`} />
+                    <Crosshair className="w-3.5 h-3.5" />
                 </button>
             </div>
 
@@ -116,7 +116,7 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
             }`}
             aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
           >
-            <Heart className={`w-4 h-4 ${favorited ? 'fill-current' : ''}`} />
+            <Crosshair className="w-4 h-4" />
           </button>
         </div>
 

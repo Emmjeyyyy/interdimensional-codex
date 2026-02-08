@@ -4,7 +4,7 @@ import { api } from '../services/api';
 import { Episode, Character } from '../types';
 import { LocationEpisodeDetailSkeleton } from '../components/Loading';
 import { useFavorites } from '../hooks/useFavorites';
-import { ArrowLeft, Heart, Calendar, PlayCircle, Users, Radio } from 'lucide-react';
+import { ArrowLeft, Crosshair, Calendar, PlayCircle, Users, Radio } from 'lucide-react';
 import Card from '../components/Card';
 
 const EpisodeDetail: React.FC = () => {
@@ -95,7 +95,7 @@ const EpisodeDetail: React.FC = () => {
                         : 'bg-sci-base border-sci-frame text-sci-text hover:text-white hover:border-sci-accent'
                     }`}
                 >
-                    <Heart className={`w-4 h-4 mr-2 ${favorited ? 'fill-current' : ''}`} />
+                    <Crosshair className={`w-4 h-4 mr-2`} />
                     {favorited ? 'Log Saved' : 'Save Log'}
                 </button>
             </div>

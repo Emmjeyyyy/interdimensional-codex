@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, Heart, Terminal, Map, Radio } from 'lucide-react';
+import { Menu, X, Crosshair, Terminal, Map, Radio } from 'lucide-react';
 import { PortalIcon } from './PortalIcon';
 
 const Navbar: React.FC = () => {
@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
     { name: 'Subjects', path: '/characters', icon: <Terminal className="w-4 h-4" /> },
     { name: 'Sectors', path: '/locations', icon: <Map className="w-4 h-4" /> },
     { name: 'Logs', path: '/episodes', icon: <Radio className="w-4 h-4" /> },
-    { name: 'Saved', path: '/favorites', icon: <Heart className="w-4 h-4" /> },
+    { name: 'Saved', path: '/favorites', icon: <Crosshair className="w-4 h-4" /> },
   ];
 
   const getIsActive = (itemPath: string, navLinkIsActive: boolean) => {

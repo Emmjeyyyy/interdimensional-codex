@@ -4,7 +4,7 @@ import { api } from '../services/api';
 import { Character, Episode } from '../types';
 import { CharacterDetailSkeleton } from '../components/Loading';
 import { useFavorites } from '../hooks/useFavorites';
-import { ArrowLeft, Heart, MapPin, Tv, Zap, Eye, EyeOff, Activity, Users, ShieldAlert } from 'lucide-react';
+import { ArrowLeft, Crosshair, MapPin, Tv, Zap, Eye, EyeOff, Activity, Users, ShieldAlert } from 'lucide-react';
 import Card from '../components/Card';
 
 const CharacterDetail: React.FC = () => {
@@ -120,7 +120,7 @@ const CharacterDetail: React.FC = () => {
                    : 'bg-sci-frame border-sci-frameLight text-sci-text hover:text-white hover:bg-sci-frameLight'
                }`}
              >
-               <Heart className={`w-4 h-4 mr-2 ${favorited ? 'fill-current' : ''}`} />
+               <Crosshair className={`w-4 h-4 mr-2`} />
                {favorited ? 'Subject Tracked' : 'Track Subject'}
              </button>
           </div>
