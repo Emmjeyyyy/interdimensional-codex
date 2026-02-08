@@ -10,7 +10,7 @@ const Navbar: React.FC = () => {
 
   const navItems = [
     { name: 'Subjects', path: '/characters', icon: <Terminal className="w-4 h-4" /> },
-    { name: 'Sectors', path: '/locations', icon: <PlanetIcon className="w-4 h-4" /> },
+    { name: 'Sectors', path: '/locations', icon: <PlanetIcon className="w-5 h-5" /> },
     { name: 'Logs', path: '/episodes', icon: <Radio className="w-4 h-4" /> },
     { name: 'Saved', path: '/favorites', icon: <Crosshair className="w-4 h-4" /> },
   ];
