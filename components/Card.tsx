@@ -22,6 +22,17 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
     toggleFavorite({ id, name, type, image, info: subtitle });
   };
 
+  const getEpisodeDisplayNumber = () => {
+    if (type !== 'episode') return id;
+    // Extract episode number from format like "S01E01" in subtitle
+    // Ignores season number, removes leading zeros
+    const match = subtitle.match(/S\d+E(\d+)/i);
+    if (match && match[1]) {
+      return parseInt(match[1], 10);
+    }
+    return id;
+  };
+
   const isTextOnly = type === 'location' || type === 'episode';
 
   if (isTextOnly) {
@@ -60,6 +71,13 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
                         <PlanetIcon className="w-[150px] h-[150px] text-sci-accent opacity-60" />
                     </div>
                  )}
+                 
+                 {type === 'episode' && (
+                   <h2 className="font-display font-bold text-3xl text-sci-frameLight select-none group-hover:text-white transition-colors">
+                     EPISODE {getEpisodeDisplayNumber()}
+                   </h2>
+                 )}
+
                  <h3 className="font-display font-bold text-lg text-sci-accent uppercase group-hover:text-white transition-colors leading-tight break-words">
                     {name}
                  </h3>
