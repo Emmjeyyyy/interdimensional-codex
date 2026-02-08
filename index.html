@@ -8,26 +8,48 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              rm: {
-                dark: '#001400',
-                black: '#000000',
-                green: '#008C14',
-                neon: '#14F03C',
-                teal: '#14DC3C',
+              sci: {
+                base: '#0d1117', // Very dark blue-gray
+                panel: '#161b22', // Slightly lighter panel
+                frame: '#30363d', // Metal frame color
+                frameLight: '#484f58', // Highlight for bevel
+                screen: '#010409', // CRT Black
+                text: '#8b949e', // Muted text
+                accent: '#58a6ff', // Terminal Blue
+                success: '#238636', // Muted Green
+                alert: '#d29922', // Amber
+                danger: '#f85149', // Red
               }
             },
             fontFamily: {
-              sans: ['Roboto', 'sans-serif'],
+              sans: ['Share Tech Mono', 'monospace'],
               display: ['Orbitron', 'sans-serif'],
             },
+            boxShadow: {
+              'crt-inset': 'inset 0 0 20px rgba(0,0,0,0.9)',
+              'metal': 'inset 1px 1px 0 rgba(255,255,255,0.1), inset -1px -1px 0 rgba(0,0,0,0.5)',
+              'glow': '0 0 10px rgba(88, 166, 255, 0.3)',
+            },
             animation: {
-              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'scanline': 'scanline 8s linear infinite',
+              'flicker': 'flicker 0.15s infinite',
+            },
+            keyframes: {
+              scanline: {
+                '0%': { transform: 'translateY(-100%)' },
+                '100%': { transform: 'translateY(100%)' }
+              },
+              flicker: {
+                '0%': { opacity: '0.97' },
+                '50%': { opacity: '1' },
+                '100%': { opacity: '0.98' }
+              }
             }
           }
         }
@@ -35,79 +57,68 @@
     </script>
     <style>
       body {
-        background-color: #000000;
-        color: white;
-      }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #001400;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #008C14;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #14F03C;
+        background-color: #050505;
+        color: #8b949e;
+        background-image: 
+          linear-gradient(rgba(18, 18, 18, 0.8) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(18, 18, 18, 0.8) 1px, transparent 1px);
+        background-size: 40px 40px;
       }
       
-      /* Starry Background Utility - Randomized Fixed Box Shadows */
-      .bg-space {
-        background-color: #000000;
-        position: relative;
-      }
-      
-      /* Small Stars (2px) */
-      .bg-space::before {
+      /* CRT Scanline Overlay */
+      .scanlines::before {
         content: " ";
-        position: fixed;
+        display: block;
+        position: absolute;
         top: 0;
         left: 0;
-        width: 2px;
-        height: 2px;
-        border-radius: 50%;
-        background: transparent;
-        box-shadow: 
-          12vw 5vh #fff, 85vw 12vh #ccc, 34vw 45vh #fff, 76vw 89vh #aaa, 5vw 95vh #fff,
-          43vw 23vh #888, 92vw 67vh #fff, 18vw 34vh #ddd, 65vw 56vh #fff, 29vw 82vh #ccc,
-          55vw 12vh #fff, 11vw 76vh #999, 98vw 34vh #fff, 23vw 91vh #eee, 45vw 55vh #fff,
-          67vw 23vh #aaa, 32vw 45vh #fff, 87vw 12vh #bbb, 9vw 67vh #fff, 54vw 89vh #ddd,
-          21vw 34vh #fff, 78vw 56vh #ccc, 13vw 98vh #fff, 91vw 23vh #888, 34vw 67vh #fff,
-          56vw 89vh #eee, 12vw 45vh #fff, 89vw 76vh #aaa, 23vw 12vh #fff, 67vw 34vh #bbb,
-          45vw 98vh #fff, 89vw 23vh #ccc, 34vw 56vh #fff, 12vw 78vh #ddd, 67vw 91vh #fff,
-          23vw 45vh #aaa, 78vw 12vh #fff, 45vw 67vh #ccc, 91vw 89vh #fff, 12vw 23vh #888,
-          56vw 34vh #fff, 89vw 56vh #eee, 23vw 78vh #fff, 67vw 12vh #bbb, 34vw 91vh #fff,
-          12vw 45vh #ddd, 78vw 67vh #fff, 45vw 89vh #aaa, 91vw 12vh #fff, 23vw 34vh #ccc,
-          37vw 18vh #fff, 82vw 41vh #aaa, 15vw 62vh #fff, 69vw 94vh #888, 28vw 33vh #fff,
-          51vw 75vh #ccc, 93vw 7vh #fff, 4vw 86vh #ddd, 61vw 29vh #fff, 26vw 53vh #aaa,
-          88vw 81vh #fff, 47vw 4vh #bbb, 73vw 66vh #fff, 19vw 39vh #aaa, 59vw 92vh #fff,
-          6vw 16vh #ccc, 33vw 71vh #fff, 77vw 25vh #eee, 52vw 48vh #fff, 96vw 85vh #aaa,
-          2vw 8vh #fff, 99vw 2vh #888, 14vw 22vh #fff, 50vw 50vh #fff, 38vw 72vh #ccc;
-        z-index: 0;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+        z-index: 2;
+        background-size: 100% 2px, 3px 100%;
         pointer-events: none;
       }
 
-      /* Medium Stars (3px) - Fewer, brighter */
-      .bg-space::after {
-        content: " ";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 3px;
-        height: 3px;
-        border-radius: 50%;
-        background: transparent;
-        box-shadow: 
-          8vw 25vh #fff, 94vw 82vh #ccc, 31vw 64vh #fff, 57vw 11vh #ddd, 72vw 48vh #fff,
-          24vw 93vh #aaa, 49vw 36vh #fff, 86vw 59vh #eee, 16vw 8vh #fff, 63vw 77vh #ccc,
-          39vw 21vh #fff, 81vw 96vh #aaa, 53vw 42vh #fff, 5vw 68vh #ddd, 28vw 54vh #fff,
-          91vw 14vh #bbb, 66vw 87vh #fff, 19vw 32vh #ccc, 75vw 63vh #fff, 42vw 5vh #eee,
-          83vw 33vh #fff, 3vw 52vh #ccc, 27vw 88vh #fff, 61vw 19vh #aaa, 46vw 74vh #fff;
-        z-index: 0;
-        pointer-events: none;
-        opacity: 0.8;
+      /* Custom Scrollbar - Industrial */
+      ::-webkit-scrollbar {
+        width: 12px;
+        background: #0d1117;
+      }
+      ::-webkit-scrollbar-track {
+        border-left: 1px solid #30363d;
+        background: #010409;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #30363d;
+        border: 2px solid #010409;
+        border-radius: 0;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #58a6ff;
+      }
+
+      /* CRT Text Glow Utility */
+      .text-glow {
+        text-shadow: 0 0 5px rgba(88, 166, 255, 0.5);
+      }
+      .text-glow-green {
+        text-shadow: 0 0 5px rgba(35, 134, 54, 0.5);
+      }
+      
+      /* Beveled Border Utility */
+      .bevel-box {
+        border-top: 2px solid #484f58;
+        border-left: 2px solid #484f58;
+        border-right: 2px solid #161b22;
+        border-bottom: 2px solid #161b22;
+      }
+      
+      .bevel-btn:active {
+        border-top: 2px solid #161b22;
+        border-left: 2px solid #161b22;
+        border-right: 2px solid #484f58;
+        border-bottom: 2px solid #484f58;
       }
     </style>
   <script type="importmap">

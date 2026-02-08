@@ -1,41 +1,51 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Menu, X, Heart } from 'lucide-react';
+import { Menu, X, Heart, Terminal, Map, Radio } from 'lucide-react';
 import { PortalIcon } from './PortalIcon';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: 'Characters', path: '/characters' },
-    { name: 'Locations', path: '/locations' },
-    { name: 'Episodes', path: '/episodes' },
-    { name: 'Favorites', path: '/favorites', icon: <Heart className="w-4 h-4 mr-1 inline" /> },
+    { name: 'Subjects', path: '/characters', icon: <Terminal className="w-4 h-4 mr-2" /> },
+    { name: 'Sectors', path: '/locations', icon: <Map className="w-4 h-4 mr-2" /> },
+    { name: 'Logs', path: '/episodes', icon: <Radio className="w-4 h-4 mr-2" /> },
+    { name: 'Saved', path: '/favorites', icon: <Heart className="w-4 h-4 mr-2" /> },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-black/90 backdrop-blur-md border-b border-rm-green/50 shadow-[0_0_15px_rgba(0,140,20,0.5)]">
+    <nav className="bg-sci-panel border-b-4 border-sci-frame shadow-2xl z-50">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <NavLink to="/" className="flex items-center space-x-3">
-            <PortalIcon className="w-10 h-10" />
-            <span className="font-display font-bold text-xl md:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-rm-neon to-rm-teal drop-shadow-[0_0_2px_rgba(20,240,60,0.5)]">
-              INTERDIMENSIONAL CODEX
-            </span>
-          </NavLink>
+        <div className="flex justify-between items-stretch h-20">
+          {/* Logo Section */}
+          <div className="flex items-center">
+            <NavLink to="/" className="flex items-center space-x-4 group">
+              <div className="relative w-12 h-12 bg-sci-screen border-2 border-sci-frame rounded flex items-center justify-center overflow-hidden">
+                 <div className="absolute inset-0 bg-sci-accent/10 scanlines"></div>
+                 <PortalIcon className="w-8 h-8 text-sci-accent group-hover:text-white transition-colors" />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-display font-black text-xl text-sci-accent tracking-wider leading-none text-glow">
+                  CODEX
+                </span>
+                <span className="text-[0.6rem] uppercase tracking-[0.3em] text-sci-text">
+                  Classified Database
+                </span>
+              </div>
+            </NavLink>
+          </div>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex space-x-8">
+          {/* Desktop Nav - Physical Buttons */}
+          <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
                 className={({ isActive }) =>
-                  `font-display text-sm tracking-widest uppercase transition-all duration-300 flex items-center ${
+                  `h-10 px-6 flex items-center justify-center font-display text-sm tracking-wider uppercase transition-all duration-100 bevel-box ${
                     isActive
-                      ? 'text-rm-neon drop-shadow-[0_0_8px_rgba(20,240,60,0.8)] border-b-2 border-rm-neon'
-                      : 'text-gray-300 hover:text-rm-teal hover:drop-shadow-[0_0_5px_rgba(20,220,60,0.5)]'
+                      ? 'bg-sci-accent/20 text-sci-accent border-sci-accent/50 shadow-glow'
+                      : 'bg-sci-base text-gray-400 hover:bg-sci-frame hover:text-white'
                   }`
                 }
               >
@@ -46,37 +56,38 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-rm-neon hover:text-white transition-colors focus:outline-none"
+              className="p-2 bg-sci-frame text-sci-accent border-2 border-sci-frameLight rounded active:bg-sci-base"
               aria-label="Toggle menu"
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Nav */}
+      {/* Mobile Nav Panel */}
       {isOpen && (
-        <div className="md:hidden bg-rm-dark border-t border-rm-green/30">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <div className="md:hidden bg-sci-panel border-b-2 border-sci-frame">
+          <div className="px-4 pt-2 pb-4 space-y-2">
             {navItems.map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
                 onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
-                  `block px-3 py-2 rounded-md text-base font-display font-medium uppercase tracking-wider ${
+                  `block px-4 py-3 rounded text-sm font-bold uppercase tracking-wider border ${
                     isActive
-                      ? 'text-rm-dark bg-rm-neon shadow-[0_0_10px_rgba(20,240,60,0.6)]'
-                      : 'text-gray-300 hover:text-rm-neon hover:bg-black/50'
+                      ? 'bg-sci-accent/10 text-sci-accent border-sci-accent'
+                      : 'bg-sci-base text-gray-400 border-sci-frame'
                   }`
                 }
               >
-                {item.icon}
-                {item.name}
+                <span className="flex items-center">
+                   {item.icon} {item.name}
+                </span>
               </NavLink>
             ))}
           </div>

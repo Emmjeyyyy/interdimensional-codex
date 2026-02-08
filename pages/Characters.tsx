@@ -52,11 +52,10 @@ const Characters: React.FC = () => {
     } catch (err: any) {
       setCharacters([]);
       setTotalPages(0);
-      // Check for 404 (standard) or "Not Found" (common statusText)
       if (err.message.includes("404") || err.message.includes("Not Found")) {
-        setError("No characters found.");
+        setError("DATA QUERY RETURNED NULL.");
       } else {
-        setError("Failed to load characters. Please try again.");
+        setError("SYSTEM FAILURE: UNABLE TO RETRIEVE DATA.");
       }
     } finally {
       setLoading(false);
@@ -65,9 +64,12 @@ const Characters: React.FC = () => {
 
   return (
     <div>
-      <h1 className="text-4xl font-display font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-rm-neon to-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-        Characters
-      </h1>
+      <div className="flex items-end mb-6 border-b border-sci-accent/30 pb-2">
+        <h1 className="text-4xl font-display font-bold text-sci-text uppercase tracking-widest">
+          Subjects
+        </h1>
+        <span className="ml-4 font-mono text-sci-accent text-sm mb-2 opacity-70">// BIOLOGICAL DATABASE</span>
+      </div>
       
       <CharacterFilters 
         search={name} setSearch={setName}
@@ -77,14 +79,14 @@ const Characters: React.FC = () => {
       {loading ? (
         <ListSkeleton />
       ) : error ? (
-        <div className="flex flex-col items-center justify-center py-20 bg-black/40 border border-red-500/30 rounded-xl">
-          <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
-          <p className="text-xl text-gray-300">{error}</p>
+        <div className="flex flex-col items-center justify-center py-20 bg-sci-base border-2 border-dashed border-sci-danger/30 rounded-sm">
+          <AlertCircle className="w-16 h-16 text-sci-danger mb-4 opacity-80" />
+          <p className="text-xl font-mono text-sci-danger uppercase tracking-widest">{error}</p>
           <button 
             onClick={() => { setName(''); setSpecies(''); }}
-            className="mt-4 text-rm-neon hover:underline"
+            className="mt-6 px-4 py-2 bg-sci-danger/10 text-sci-danger border border-sci-danger font-mono text-xs hover:bg-sci-danger hover:text-black transition-colors"
           >
-            Clear filters
+            RESET SEARCH PARAMETERS
           </button>
         </div>
       ) : (
@@ -97,7 +99,7 @@ const Characters: React.FC = () => {
                 name={char.name}
                 type="character"
                 image={char.image}
-                subtitle={`${char.species} - ${char.gender}`}
+                subtitle={`${char.species} // ${char.gender}`}
               />
             ))}
           </div>

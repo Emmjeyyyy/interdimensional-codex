@@ -45,9 +45,9 @@ const Locations: React.FC = () => {
       setLocations([]);
       setTotalPages(0);
       if (err.message.includes("404")) {
-        setError("No locations found.");
+        setError("SECTOR NOT FOUND.");
       } else {
-        setError("Failed to load locations.");
+        setError("NAVIGATIONAL DATA CORRUPTED.");
       }
     } finally {
       setLoading(false);
@@ -56,22 +56,25 @@ const Locations: React.FC = () => {
 
   return (
     <div>
-      <h1 className="text-4xl font-display font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-rm-neon to-white">
-        Locations
-      </h1>
+      <div className="flex items-end mb-6 border-b border-sci-accent/30 pb-2">
+        <h1 className="text-4xl font-display font-bold text-sci-text uppercase tracking-widest">
+          Sectors
+        </h1>
+        <span className="ml-4 font-mono text-sci-accent text-sm mb-2 opacity-70">// PLANETARY REGISTRY</span>
+      </div>
 
       <SimpleSearch 
         search={name} 
         setSearch={setName} 
-        placeholder="Search locations..." 
+        placeholder="Search Coordinates..." 
       />
 
       {loading ? (
         <ListSkeleton />
       ) : error ? (
-        <div className="flex flex-col items-center justify-center py-20 bg-black/40 border border-red-500/30 rounded-xl">
-          <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
-          <p className="text-xl text-gray-300">{error}</p>
+        <div className="flex flex-col items-center justify-center py-20 bg-sci-base border-2 border-dashed border-sci-danger/30 rounded-sm">
+          <AlertCircle className="w-16 h-16 text-sci-danger mb-4 opacity-80" />
+          <p className="text-xl font-mono text-sci-danger uppercase tracking-widest">{error}</p>
         </div>
       ) : (
         <>
@@ -82,7 +85,7 @@ const Locations: React.FC = () => {
                 id={loc.id}
                 name={loc.name}
                 type="location"
-                subtitle={`${loc.type} • ${loc.dimension}`}
+                subtitle={`${loc.type} // ${loc.dimension}`}
               />
             ))}
           </div>

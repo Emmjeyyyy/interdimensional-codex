@@ -34,28 +34,28 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
   const pages = getPageNumbers();
 
   return (
-    <div className="flex justify-center items-center space-x-2 mt-8 py-4">
+    <div className="flex justify-center items-center space-x-2 mt-12 py-6 border-t border-sci-frame/50 border-dashed">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="p-2 rounded-lg bg-black/50 border border-rm-green/30 text-rm-green hover:bg-rm-green hover:text-black disabled:opacity-30 disabled:hover:bg-black/50 disabled:hover:text-rm-green transition-all"
+        className="p-3 bg-sci-panel border border-sci-frame text-sci-text hover:text-sci-accent hover:border-sci-accent disabled:opacity-30 disabled:hover:border-sci-frame bevel-btn transition-all active:translate-y-px"
         aria-label="Previous Page"
       >
         <ChevronLeft size={20} />
       </button>
 
-      <div className="flex space-x-1 sm:space-x-2 overflow-x-auto max-w-[200px] sm:max-w-none scrollbar-hide">
+      <div className="flex space-x-1 overflow-x-auto max-w-[200px] sm:max-w-none scrollbar-hide px-2">
         {pages.map((page, index) => (
           page === -1 ? (
-            <span key={`ellipsis-${index}`} className="px-3 py-1 text-gray-500 self-center">...</span>
+            <span key={`ellipsis-${index}`} className="px-3 py-1 text-sci-frameLight font-mono self-center">...</span>
           ) : (
             <button
               key={page}
               onClick={() => onPageChange(page)}
-              className={`min-w-[36px] h-9 px-2 rounded-lg text-sm font-bold font-display transition-all ${
+              className={`min-w-[40px] h-10 px-2 font-mono font-bold text-sm transition-all bevel-btn active:translate-y-px ${
                 currentPage === page
-                  ? 'bg-rm-neon text-black shadow-[0_0_10px_rgba(20,240,60,0.5)]'
-                  : 'bg-black/50 border border-rm-green/30 text-gray-300 hover:border-rm-neon hover:text-rm-neon'
+                  ? 'bg-sci-accent text-sci-base border border-sci-accent'
+                  : 'bg-sci-panel text-sci-text border border-sci-frame hover:text-sci-accent hover:border-sci-accent'
               }`}
             >
               {page}
@@ -67,7 +67,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="p-2 rounded-lg bg-black/50 border border-rm-green/30 text-rm-green hover:bg-rm-green hover:text-black disabled:opacity-30 disabled:hover:bg-black/50 disabled:hover:text-rm-green transition-all"
+        className="p-3 bg-sci-panel border border-sci-frame text-sci-text hover:text-sci-accent hover:border-sci-accent disabled:opacity-30 disabled:hover:border-sci-frame bevel-btn transition-all active:translate-y-px"
         aria-label="Next Page"
       >
         <ChevronRight size={20} />

@@ -4,7 +4,7 @@ import { api } from '../services/api';
 import { Character, Episode } from '../types';
 import { CharacterDetailSkeleton } from '../components/Loading';
 import { useFavorites } from '../hooks/useFavorites';
-import { ArrowLeft, Heart, MapPin, Tv, Zap, Eye, EyeOff, Activity, Users } from 'lucide-react';
+import { ArrowLeft, Heart, MapPin, Tv, Zap, Eye, EyeOff, Activity, Users, ShieldAlert } from 'lucide-react';
 import Card from '../components/Card';
 
 const CharacterDetail: React.FC = () => {
@@ -28,7 +28,6 @@ const CharacterDetail: React.FC = () => {
       const charData = await api.getCharacterById(Number(id));
       setCharacter(charData);
 
-      // Extract episode IDs
       const episodeIds = charData.episode.map(url => {
         const parts = url.split('/');
         return parseInt(parts[parts.length - 1]);
@@ -39,7 +38,6 @@ const CharacterDetail: React.FC = () => {
         setEpisodes(episodesData);
       }
 
-      // Fetch versions (characters with the same name)
       try {
         const versionsData = await api.getCharacters({
           name: charData.name,
@@ -48,11 +46,9 @@ const CharacterDetail: React.FC = () => {
           species: '',
           gender: ''
         });
-        // Filter out current character
         const otherVersions = versionsData.results.filter(c => c.id !== charData.id);
         setVersions(otherVersions);
       } catch (vErr) {
-        // Versions fetch failed or no results (404), just ignore
         setVersions([]);
       }
 
@@ -64,174 +60,206 @@ const CharacterDetail: React.FC = () => {
   };
 
   if (loading) return <CharacterDetailSkeleton />;
-  if (error || !character) return <div className="text-center py-20 text-red-500 text-xl">{error}</div>;
+  if (error || !character) return <div className="text-center py-20 text-sci-danger font-mono text-xl border border-sci-danger/50 bg-sci-danger/10 p-4 mx-4">{error}</div>;
 
   const favorited = isFavorite(character.id, 'character');
 
   return (
-    <div className="max-w-5xl mx-auto animate-fade-in">
-      <Link to="/characters" className="inline-flex items-center text-rm-green hover:text-rm-neon mb-6 transition-colors font-display tracking-wide text-sm">
-        <ArrowLeft className="w-4 h-4 mr-2" /> Back to Characters
+    <div className="max-w-6xl mx-auto animate-fade-in">
+      <Link to="/characters" className="inline-flex items-center text-sci-text hover:text-sci-accent mb-6 transition-colors font-mono tracking-wide text-xs uppercase group">
+        <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" /> Return to Database
       </Link>
 
-      <div className="bg-black border border-rm-green/30 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(0,140,20,0.1)]">
-        
-        {/* Banner Section */}
-        <div className="h-48 w-full bg-gradient-to-r from-rm-dark via-[#002400] to-rm-dark relative border-b border-rm-green/20">
-           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-rm-green/20 via-transparent to-transparent opacity-50"></div>
+      {/* Main Dossier Container */}
+      <div className="bg-sci-panel border-2 border-sci-frame rounded-sm overflow-hidden shadow-2xl relative">
+        {/* Top Secret Stamp */}
+        <div className="absolute top-4 right-4 z-10 opacity-20 rotate-12 border-4 border-sci-danger text-sci-danger p-2 font-black text-4xl uppercase tracking-widest pointer-events-none select-none">
+            Classified
         </div>
 
-        <div className="px-6 md:px-10 pb-10">
-          {/* Avatar & Header - Negative margin to overlap banner */}
-          <div className="flex flex-col items-center -mt-24 mb-10 relative z-10">
-             <div className="p-1.5 rounded-full bg-gradient-to-br from-rm-neon via-rm-green to-rm-dark shadow-[0_0_25px_rgba(20,240,60,0.4)]">
-               <img 
-                 src={character.image} 
-                 alt={character.name} 
-                 className="w-48 h-48 rounded-full object-cover border-4 border-black bg-black"
-               />
+        {/* Header Bar */}
+        <div className="bg-sci-frame border-b border-sci-frameLight px-6 py-3 flex justify-between items-center">
+             <div className="font-mono text-xs text-sci-text uppercase tracking-[0.2em]">Subject Dossier #{character.id}</div>
+             <div className="flex gap-2">
+                 <div className="w-3 h-3 rounded-full bg-sci-danger animate-pulse"></div>
+                 <div className="w-3 h-3 rounded-full bg-sci-accent opacity-50"></div>
+                 <div className="w-3 h-3 rounded-full bg-sci-success opacity-50"></div>
              </div>
+        </div>
+
+        <div className="p-6 md:p-10 flex flex-col lg:flex-row gap-10">
+          
+          {/* Left Col: Visuals */}
+          <div className="lg:w-1/3 flex flex-col">
+             {/* CRT Image Container */}
+             <div className="bg-sci-base p-4 border-2 border-sci-frame shadow-crt-inset mb-6 relative">
+               <div className="relative overflow-hidden border border-sci-frameLight/30">
+                 <div className="absolute inset-0 z-20 pointer-events-none scanlines opacity-40"></div>
+                 <img 
+                   src={character.image} 
+                   alt={character.name} 
+                   className="w-full h-auto object-cover filter contrast-125 sepia-[0.2]"
+                 />
+                 <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-2 border-t border-sci-accent/30">
+                    <p className="text-center text-xs font-mono text-sci-accent uppercase animate-pulse">Live Feed</p>
+                 </div>
+               </div>
+             </div>
+
+             <button
+               onClick={() => toggleFavorite({ 
+                 id: character.id, 
+                 name: character.name, 
+                 type: 'character', 
+                 image: character.image, 
+                 info: `${character.species} - ${character.gender}` 
+               })}
+               className={`w-full py-3 flex items-center justify-center border font-mono uppercase tracking-wider text-sm transition-all bevel-btn active:translate-y-px ${
+                 favorited 
+                   ? 'bg-sci-danger/20 border-sci-danger text-sci-danger' 
+                   : 'bg-sci-frame border-sci-frameLight text-sci-text hover:text-white hover:bg-sci-frameLight'
+               }`}
+             >
+               <Heart className={`w-4 h-4 mr-2 ${favorited ? 'fill-current' : ''}`} />
+               {favorited ? 'Subject Tracked' : 'Track Subject'}
+             </button>
+          </div>
+
+          {/* Right Col: Data */}
+          <div className="lg:w-2/3">
+             <h1 className="text-4xl md:text-5xl font-display font-bold text-sci-accent mb-2 uppercase tracking-tight text-glow">
+               {character.name}
+             </h1>
+             <div className="h-px w-full bg-gradient-to-r from-sci-accent to-transparent mb-8 opacity-50"></div>
              
-             <div className="mt-6 text-center">
-                <h1 className="text-4xl md:text-5xl font-display font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mb-4">
-                  {character.name}
-                </h1>
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
                 
-                <button
-                  onClick={() => toggleFavorite({ 
-                    id: character.id, 
-                    name: character.name, 
-                    type: 'character', 
-                    image: character.image, 
-                    info: `${character.species} - ${character.gender}` 
-                  })}
-                  className="inline-flex items-center px-6 py-2.5 rounded-full bg-white/5 hover:bg-rm-neon hover:text-black transition-all border border-white/10 group"
-                >
-                  <Heart className={`w-5 h-5 mr-2 ${favorited ? 'fill-red-500 text-red-500 hover:text-black' : 'text-gray-300'}`} />
-                  <span className="font-medium tracking-wide">{favorited ? 'Favorited' : 'Add to Favorites'}</span>
-                </button>
-             </div>
-          </div>
-
-          {/* Details Grid */}
-          <div className="max-w-4xl mx-auto">
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 mb-10">
-                {/* Left Column */}
-                <div className="space-y-6">
-                   {/* Status */}
-                   <div className="flex items-center p-4 rounded-xl bg-white/5 border border-white/5 hover:border-rm-green/30 transition-colors">
-                      <Activity className="w-8 h-8 mr-4 text-rm-neon flex-shrink-0" />
-                      <div className="flex-grow">
-                        <span className="block text-xs text-gray-400 uppercase tracking-wider mb-1">Status</span>
-                        <button
-                          onClick={() => setShowStatus(!showStatus)}
-                          className="flex items-center space-x-2 focus:outline-none group w-full"
-                        >
-                          <div className="flex-shrink-0 w-5 flex justify-center">
-                            {showStatus ? (
-                              <EyeOff className="w-4 h-4 text-gray-500" />
-                            ) : (
-                              <Eye className="w-4 h-4 text-rm-neon animate-pulse" />
-                            )}
-                          </div>
-                          <span className={`text-lg font-medium transition-colors ${
+                {/* Status Module */}
+                <div className="bg-sci-base border border-sci-frame p-4 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-1">
+                        <Activity className="w-4 h-4 text-sci-frameLight" />
+                    </div>
+                    <span className="block text-[0.6rem] text-sci-frameLight uppercase tracking-widest mb-2 font-mono">Vital Signs</span>
+                    <button
+                      onClick={() => setShowStatus(!showStatus)}
+                      className="w-full text-left focus:outline-none group"
+                    >
+                      <div className="flex items-center justify-between">
+                         <span className={`text-xl font-mono uppercase ${
                             showStatus 
-                              ? (character.status === 'Alive' ? 'text-rm-green' : character.status === 'Dead' ? 'text-red-500' : 'text-gray-400')
-                              : 'text-white group-hover:text-rm-neon'
-                          }`}>
-                            {showStatus ? character.status : 'Reveal Status'}
-                          </span>
-                        </button>
+                              ? (character.status === 'Alive' ? 'text-sci-success text-glow-green' : character.status === 'Dead' ? 'text-sci-danger' : 'text-sci-text')
+                              : 'text-sci-text/50 blur-sm group-hover:blur-none transition-all'
+                         }`}>
+                           {showStatus ? character.status : '[REDACTED]'}
+                         </span>
+                         {showStatus ? <EyeOff size={16} className="text-sci-frameLight"/> : <Eye size={16} className="text-sci-accent animate-pulse"/>}
                       </div>
-                   </div>
-
-                   {/* Species */}
-                   <div className="flex items-center p-4 rounded-xl bg-white/5 border border-white/5 hover:border-rm-green/30 transition-colors">
-                      <Zap className="w-8 h-8 mr-4 text-rm-neon flex-shrink-0" />
-                      <div>
-                        <span className="block text-xs text-gray-400 uppercase tracking-wider mb-1">Species & Gender</span>
-                        <span className="text-lg font-medium text-white">{character.species} ({character.gender})</span>
-                      </div>
-                   </div>
+                    </button>
                 </div>
 
-                {/* Right Column */}
-                <div className="space-y-6">
-                   {/* Origin */}
-                   <div className="flex items-center p-4 rounded-xl bg-white/5 border border-white/5 hover:border-rm-green/30 transition-colors">
-                      <MapPin className="w-8 h-8 mr-4 text-rm-neon flex-shrink-0" />
-                      <div>
-                        <span className="block text-xs text-gray-400 uppercase tracking-wider mb-1">Origin</span>
-                        {character.origin.url ? (
-                          <Link to={`/locations/${character.origin.url.split('/').pop()}`} className="text-lg font-medium text-white hover:text-rm-neon underline decoration-rm-green/50 decoration-1 hover:decoration-rm-neon">
-                            {character.origin.name}
-                          </Link>
-                        ) : (
-                          <span className="text-lg font-medium text-white">{character.origin.name}</span>
-                        )}
-                      </div>
-                   </div>
+                {/* Species Module */}
+                <div className="bg-sci-base border border-sci-frame p-4">
+                    <div className="flex justify-between items-start mb-2">
+                        <span className="text-[0.6rem] text-sci-frameLight uppercase tracking-widest font-mono">Biological Classification</span>
+                        <Zap className="w-4 h-4 text-sci-frameLight" />
+                    </div>
+                    <div className="text-xl font-mono text-sci-text uppercase">
+                        {character.species} <span className="text-sm opacity-50">//{character.gender}</span>
+                    </div>
+                </div>
 
-                   {/* Location */}
-                   <div className="flex items-center p-4 rounded-xl bg-white/5 border border-white/5 hover:border-rm-green/30 transition-colors">
-                      <MapPin className="w-8 h-8 mr-4 text-rm-neon flex-shrink-0" />
-                      <div>
-                         <span className="block text-xs text-gray-400 uppercase tracking-wider mb-1">Last Known Location</span>
-                         {character.location.url ? (
-                           <Link to={`/locations/${character.location.url.split('/').pop()}`} className="text-lg font-medium text-white hover:text-rm-neon underline decoration-rm-green/50 decoration-1 hover:decoration-rm-neon">
-                             {character.location.name}
-                           </Link>
-                         ) : (
-                           <span className="text-lg font-medium text-white">{character.location.name}</span>
-                         )}
-                      </div>
+                {/* Origin Module */}
+                <div className="bg-sci-base border border-sci-frame p-4 col-span-1 md:col-span-2">
+                     <div className="flex justify-between items-start mb-2">
+                        <span className="text-[0.6rem] text-sci-frameLight uppercase tracking-widest font-mono">Origin Point</span>
+                        <MapPin className="w-4 h-4 text-sci-frameLight" />
+                    </div>
+                    {character.origin.url ? (
+                        <Link to={`/locations/${character.origin.url.split('/').pop()}`} className="text-lg font-mono text-sci-accent hover:underline hover:text-white transition-colors uppercase flex items-center">
+                        {character.origin.name} <span className="ml-2 text-xs border border-sci-accent px-1 rounded-sm">LINK</span>
+                        </Link>
+                    ) : (
+                        <span className="text-lg font-mono text-sci-text uppercase">{character.origin.name}</span>
+                    )}
+                </div>
+                 
+                 {/* Location Module */}
+                <div className="bg-sci-base border border-sci-frame p-4 col-span-1 md:col-span-2">
+                     <div className="flex justify-between items-start mb-2">
+                        <span className="text-[0.6rem] text-sci-frameLight uppercase tracking-widest font-mono">Last Known Coordinates</span>
+                        <MapPin className="w-4 h-4 text-sci-frameLight" />
+                    </div>
+                    {character.location.url ? (
+                        <Link to={`/locations/${character.location.url.split('/').pop()}`} className="text-lg font-mono text-sci-accent hover:underline hover:text-white transition-colors uppercase flex items-center">
+                        {character.location.name} <span className="ml-2 text-xs border border-sci-accent px-1 rounded-sm">LINK</span>
+                        </Link>
+                    ) : (
+                        <span className="text-lg font-mono text-sci-text uppercase">{character.location.name}</span>
+                    )}
+                </div>
+             </div>
+
+             {/* Episodes Log */}
+             <div className="border-t border-sci-frame pt-6">
+                <div className="flex items-center mb-4 text-sci-text">
+                  <Tv className="w-5 h-5 mr-2" />
+                  <h2 className="text-lg font-display font-bold uppercase tracking-wider">Appearance Log ({character.episode.length})</h2>
+                </div>
+                <div className="h-48 overflow-y-auto bg-sci-base border border-sci-frame p-2 custom-scrollbar">
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {episodes.map(ep => (
+                      <Link 
+                        key={ep.id} 
+                        to={`/episodes/${ep.id}`}
+                        className="flex items-center p-2 hover:bg-sci-frame/50 transition-colors group"
+                      >
+                        <span className="font-mono text-sci-accent text-xs mr-2 border-r border-sci-frameLight pr-2 group-hover:text-white">{ep.episode}</span>
+                        <span className="text-xs text-sci-text font-mono truncate uppercase group-hover:text-white">{ep.name}</span>
+                      </Link>
+                    ))}
                    </div>
                 </div>
              </div>
 
-             {/* Versions */}
-             {versions.length > 0 && (
-                <div className="border-t border-gray-800 pt-8 mb-10">
-                   <div className="flex items-center mb-6 text-white">
-                     <Users className="w-6 h-6 mr-3 text-rm-neon" />
-                     <h2 className="text-2xl font-display font-bold">Versions ({versions.length})</h2>
-                   </div>
-                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {versions.map(ver => (
-                        <Card 
-                            key={ver.id}
-                            id={ver.id}
-                            name={ver.name}
-                            type="character"
-                            image={ver.image}
-                            subtitle={`${ver.species} - ${ver.status}`}
-                        />
-                      ))}
-                   </div>
-                </div>
-             )}
-
-             {/* Episodes  */}
-             <div className="border-t border-gray-800 pt-8">
-               <div className="flex items-center mb-6 text-white">
-                 <Tv className="w-6 h-6 mr-3 text-rm-neon" />
-                 <h2 className="text-2xl font-display font-bold">Episodes ({character.episode.length})</h2>
-               </div>
-               <div className="flex flex-wrap gap-2 max-h-60 overflow-y-auto pr-2 custom-scrollbar">
-                 {episodes.map(ep => (
-                   <Link 
-                     key={ep.id} 
-                     to={`/episodes/${ep.id}`}
-                     className="px-3 py-2 bg-white/5 border border-white/10 rounded-md text-sm hover:border-rm-neon hover:text-rm-neon transition-colors"
-                   >
-                     <span className="font-bold text-gray-400 mr-1">{ep.episode}:</span> {ep.name}
-                   </Link>
-                 ))}
-               </div>
-             </div>
           </div>
+        </div>
+        
+        {/* Decorative Bottom Bar */}
+        <div className="bg-sci-panel p-2 flex justify-between border-t border-sci-frame">
+           <div className="text-[10px] text-sci-frameLight font-mono">SECURE CONNECTION ESTABLISHED</div>
+           <div className="flex gap-1">
+              {[...Array(5)].map((_, i) => (
+                  <div key={i} className="w-4 h-1 bg-sci-frameLight/30"></div>
+              ))}
+           </div>
         </div>
       </div>
+
+      {/* Alternate Versions */}
+      {versions.length > 0 && (
+        <div className="mt-12">
+            <div className="flex items-center mb-6 text-sci-text border-b border-sci-frame pb-2">
+                <Users className="w-6 h-6 mr-3 text-sci-accent" />
+                <h2 className="text-xl font-display font-bold uppercase tracking-wider">Dimensional Variants Detected</h2>
+                <div className="ml-auto px-2 py-1 bg-sci-alert/20 text-sci-alert text-xs font-mono border border-sci-alert uppercase flex items-center">
+                    <ShieldAlert className="w-3 h-3 mr-1" />
+                    {versions.length} Matches
+                </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {versions.map(ver => (
+                <Card 
+                    key={ver.id}
+                    id={ver.id}
+                    name={ver.name}
+                    type="character"
+                    image={ver.image}
+                    subtitle={`${ver.species} // ${ver.status}`}
+                />
+                ))}
+            </div>
+        </div>
+      )}
     </div>
   );
 };

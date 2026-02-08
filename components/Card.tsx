@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Heart } from 'lucide-react';
+import { Heart, Activity } from 'lucide-react';
 import { useFavorites } from '../hooks/useFavorites';
 
 interface CardProps {
@@ -22,48 +22,70 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
   };
 
   return (
-    <div className="group relative bg-black border border-rm-green/40 rounded-xl overflow-hidden hover:border-rm-neon hover:shadow-[0_0_15px_rgba(20,240,60,0.3)] transition-all duration-300 flex flex-col h-full">
+    <div className="group relative bg-sci-frame p-1 pb-2 rounded-sm shadow-xl hover:shadow-glow transition-shadow duration-300">
       <Link to={`/${type}s/${id}`} className="flex flex-col h-full">
-        {image && (
-          <div className="relative aspect-square overflow-hidden">
-            <img
-              src={image}
-              alt={name}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              loading="lazy"
-            />
-          </div>
-        )}
+        
+        {/* CRT Screen Container */}
+        <div className="relative bg-sci-screen border-4 border-sci-panel rounded-lg mb-2 overflow-hidden shadow-crt-inset h-64 flex flex-col items-center justify-center">
+          
+          {/* Scanlines & Glare Overlay */}
+          <div className="absolute inset-0 z-20 pointer-events-none scanlines opacity-50 mix-blend-overlay"></div>
+          <div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-b from-white/5 to-transparent h-1/3 opacity-30"></div>
+          
+          {image ? (
+            <div className="w-full h-full relative">
+               <img
+                src={image}
+                alt={name}
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300 filter sepia-[0.3] contrast-125"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-sci-accent/20 mix-blend-color opacity-30 pointer-events-none"></div>
+            </div>
+          ) : (
+             <div className="w-full h-full flex flex-col items-center justify-center text-sci-frameLight p-6 text-center">
+                <Activity className="w-12 h-12 mb-2 opacity-20" />
+                <span className="text-xs uppercase tracking-widest opacity-50">No Visual Data</span>
+             </div>
+          )}
 
-        <div className={`flex flex-col flex-grow ${image ? 'p-4' : 'p-5'}`}>
-          {/* Title Container - Add padding right when no image to prevent overlap with absolute heart button */}
-          <div className={`flex justify-between items-start mb-2 ${!image ? 'pr-10' : ''}`}>
-            <h3 className="font-display font-bold text-lg text-white mb-1 truncate group-hover:text-rm-neon transition-colors w-full">
-              {name}
-            </h3>
+          {/* Status Indicator inside screen */}
+          <div className="absolute top-3 left-3 z-30 flex items-center space-x-2">
+             <div className={`w-2 h-2 rounded-full ${favorited ? 'bg-sci-danger shadow-[0_0_8px_rgba(248,81,73,1)]' : 'bg-sci-success/50'}`}></div>
+             <span className="text-[0.5rem] uppercase text-sci-text tracking-widest font-mono">REC-{id.toString().padStart(4, '0')}</span>
           </div>
+
+          {/* Favorite Button (Hardware switch style) */}
+          <button
+            onClick={handleFavoriteClick}
+            className={`absolute top-2 right-2 z-30 p-1.5 border border-sci-text/30 bg-black/60 hover:bg-sci-accent hover:text-black transition-colors ${
+              favorited ? 'text-sci-danger border-sci-danger' : 'text-sci-text'
+            }`}
+            aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
+          >
+            <Heart className={`w-4 h-4 ${favorited ? 'fill-current' : ''}`} />
+          </button>
+        </div>
+
+        {/* Metal Plate Label */}
+        <div className="bg-sci-panel border border-sci-frameLight p-3 mt-auto relative">
+          {/* Screws */}
+          <div className="absolute top-1 left-1 w-1 h-1 rounded-full bg-sci-frameLight/50"></div>
+          <div className="absolute top-1 right-1 w-1 h-1 rounded-full bg-sci-frameLight/50"></div>
+          <div className="absolute bottom-1 left-1 w-1 h-1 rounded-full bg-sci-frameLight/50"></div>
+          <div className="absolute bottom-1 right-1 w-1 h-1 rounded-full bg-sci-frameLight/50"></div>
+
+          <h3 className="font-display font-bold text-md text-sci-accent uppercase truncate text-center mb-1 group-hover:text-white transition-colors">
+            {name}
+          </h3>
           
-          <p className="text-sm text-gray-400 font-medium mb-4 line-clamp-2">{subtitle}</p>
-          
-          <div className="mt-auto flex justify-between items-center">
-            <span className="text-xs text-rm-teal uppercase tracking-widest font-bold group-hover:underline">
-              Details &rarr;
-            </span>
+          <div className="flex justify-center items-center border-t border-sci-frame pt-1 mt-1">
+             <p className="text-xs text-sci-text font-mono uppercase tracking-tighter truncate max-w-full">
+               {subtitle}
+             </p>
           </div>
         </div>
       </Link>
-
-      <button
-        onClick={handleFavoriteClick}
-        className={`absolute rounded-full bg-black/60 backdrop-blur-sm text-white hover:bg-rm-neon hover:text-black transition-all duration-200 z-10 border border-white/10 ${
-          image ? 'top-2 right-2 p-2' : 'top-4 right-4 p-2'
-        }`}
-        aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
-      >
-        <Heart
-          className={`w-5 h-5 ${favorited ? 'fill-red-500 text-red-500 hover:text-black' : ''}`}
-        />
-      </button>
     </div>
   );
 };
