@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center h-24">
           {/* Logo Section */}
           <div className="flex items-center">
-            <NavLink to="/" className="flex items-center space-x-2">
+            <NavLink to="/" className="flex items-center space-x-1">
               <PortalIcon className="w-16 h-16 text-sci-accent drop-shadow-[0_0_5px_rgba(88,166,255,0.8)]" />
               <div className="flex flex-col justify-center mt-1">
                 <span className="font-display font-black text-2xl text-sci-accent tracking-wider leading-none text-glow">
