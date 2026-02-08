@@ -25,8 +25,8 @@ const Navbar: React.FC = () => {
                  <PortalIcon className="w-8 h-8 text-sci-accent group-hover:text-white transition-colors" />
               </div>
               <div className="flex flex-col">
-                <span className="font-display font-black text-xl text-sci-accent tracking-wider leading-none text-glow">
-                  CODEX
+                <span className="font-display font-black text-lg md:text-xl text-sci-accent tracking-wider leading-none text-glow">
+                  INTERDIMENSIONAL CODEX
                 </span>
                 <span className="text-[0.6rem] uppercase tracking-[0.3em] text-sci-text">
                   Classified Database
