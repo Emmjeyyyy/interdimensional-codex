@@ -35,34 +35,55 @@ const Navbar: React.FC = () => {
             </NavLink>
           </div>
 
-          {/* Desktop Nav - Physical Buttons */}
-          <div className="hidden md:flex items-center space-x-2">
+          {/* Desktop Nav - 3D Pushable Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
             {navItems.map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
-                className={({ isActive }) =>
-                  `h-10 px-6 flex items-center justify-center font-display text-sm tracking-wider uppercase transition-all duration-100 bevel-box ${
-                    isActive
-                      ? 'bg-sci-accent/20 text-sci-accent border-sci-accent/50 shadow-glow'
-                      : 'bg-sci-base text-gray-400 hover:bg-sci-frame hover:text-white'
-                  }`
-                }
+                className="group relative bg-transparent p-0 border-none cursor-pointer outline-none focus:outline-none"
+                style={{ WebkitTapHighlightColor: 'transparent' }}
               >
-                {item.icon}
-                {item.name}
+                {({ isActive }) => (
+                  <>
+                    {/* Shadow Layer */}
+                    <span className="absolute top-0 left-0 w-full h-full rounded-lg bg-black/40 blur-[2px] transform translate-y-[2px] transition-transform duration-600 ease-[cubic-bezier(0.3,0.7,0.4,1)] group-hover:translate-y-[4px] group-active:translate-y-[1px] motion-reduce:transition-none motion-reduce:transform-none will-change-transform" />
+                    
+                    {/* Edge Layer (Depth) */}
+                    <span className={`absolute top-0 left-0 w-full h-full rounded-lg transition-colors duration-200 ${
+                      isActive 
+                        ? 'bg-gradient-to-r from-[#1c4e80] via-[#2a6eb0] to-[#1c4e80]' 
+                        : 'bg-gradient-to-r from-[#1c2128] via-[#30363d] to-[#1c2128]'
+                    }`} />
+                    
+                    {/* Front Layer (Face) */}
+                    <span className={`relative block rounded-lg px-6 py-2 font-display text-sm tracking-wider uppercase transform -translate-y-[4px] transition-transform duration-600 ease-[cubic-bezier(0.3,0.7,0.4,1)] group-hover:-translate-y-[6px] group-active:-translate-y-[2px] motion-reduce:transform-none flex items-center justify-center border-t border-white/10 ${
+                      isActive
+                        ? 'bg-sci-accent text-sci-base font-bold shadow-[inset_0_2px_4px_rgba(255,255,255,0.3)]'
+                        : 'bg-sci-panel text-sci-text group-hover:brightness-110'
+                    }`}>
+                      {item.icon}
+                      {item.name}
+                    </span>
+                  </>
+                )}
               </NavLink>
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - 3D Style */}
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 bg-sci-frame text-sci-accent border-2 border-sci-frameLight rounded active:bg-sci-base"
+              className="group relative bg-transparent p-0 border-none cursor-pointer outline-none w-12 h-12"
               aria-label="Toggle menu"
+              style={{ WebkitTapHighlightColor: 'transparent' }}
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              <span className="absolute top-0 left-0 w-full h-full rounded-lg bg-black/40 blur-[2px] transform translate-y-[2px] transition-transform duration-600 ease-[cubic-bezier(0.3,0.7,0.4,1)] group-hover:translate-y-[4px] group-active:translate-y-[1px] motion-reduce:transition-none motion-reduce:transform-none" />
+              <span className="absolute top-0 left-0 w-full h-full rounded-lg bg-gradient-to-r from-[#1c2128] via-[#30363d] to-[#1c2128]" />
+              <span className="relative block w-full h-full rounded-lg bg-sci-panel text-sci-accent border-t border-white/10 flex items-center justify-center transform -translate-y-[4px] transition-transform duration-600 ease-[cubic-bezier(0.3,0.7,0.4,1)] group-hover:-translate-y-[6px] group-active:-translate-y-[2px] motion-reduce:transform-none">
+                {isOpen ? <X size={24} /> : <Menu size={24} />}
+              </span>
             </button>
           </div>
         </div>
@@ -70,24 +91,33 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Nav Panel */}
       {isOpen && (
-        <div className="md:hidden bg-sci-panel border-b-2 border-sci-frame">
-          <div className="px-4 pt-2 pb-4 space-y-2">
+        <div className="md:hidden bg-sci-panel border-b-2 border-sci-frame animate-scanline">
+          <div className="px-4 pt-4 pb-6 space-y-4">
             {navItems.map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
                 onClick={() => setIsOpen(false)}
-                className={({ isActive }) =>
-                  `block px-4 py-3 rounded text-sm font-bold uppercase tracking-wider border ${
-                    isActive
-                      ? 'bg-sci-accent/10 text-sci-accent border-sci-accent'
-                      : 'bg-sci-base text-gray-400 border-sci-frame'
-                  }`
-                }
+                className="group relative block bg-transparent p-0 border-none cursor-pointer outline-none w-full"
+                style={{ WebkitTapHighlightColor: 'transparent' }}
               >
-                <span className="flex items-center">
-                   {item.icon} {item.name}
-                </span>
+                {({ isActive }) => (
+                  <div className="h-12 w-full relative">
+                    <span className="absolute top-0 left-0 w-full h-full rounded-lg bg-black/40 blur-[1px] translate-y-[2px]" />
+                    <span className={`absolute top-0 left-0 w-full h-full rounded-lg transition-colors duration-200 ${
+                        isActive 
+                          ? 'bg-gradient-to-r from-[#1c4e80] via-[#2a6eb0] to-[#1c4e80]' 
+                          : 'bg-gradient-to-r from-[#1c2128] via-[#30363d] to-[#1c2128]'
+                    }`} />
+                    <span className={`absolute top-0 left-0 w-full h-full rounded-lg px-4 flex items-center font-bold uppercase tracking-wider transform -translate-y-[4px] active:-translate-y-[2px] transition-transform border-t border-white/10 ${
+                        isActive
+                          ? 'bg-sci-accent text-sci-base'
+                          : 'bg-sci-panel text-sci-text'
+                    }`}>
+                       {item.icon} {item.name}
+                    </span>
+                  </div>
+                )}
               </NavLink>
             ))}
           </div>
