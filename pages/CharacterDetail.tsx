@@ -93,7 +93,7 @@ const CharacterDetail: React.FC = () => {
                  <img 
                    src={character.image} 
                    alt={character.name} 
-                   className="w-full h-auto object-cover filter contrast-125 sepia-[0.2]"
+                   className="w-full h-auto object-cover filter contrast-110 sepia-[0.1]"
                  />
                  <div className="absolute bottom-0 left-0 right-0 bg-black/70 p-2 border-t border-sci-accent/30">
                     <p className="text-center text-xs font-mono text-sci-accent uppercase animate-pulse">Live Feed</p>

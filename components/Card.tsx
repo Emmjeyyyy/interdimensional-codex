@@ -115,7 +115,7 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
                <img
                 src={image}
                 alt={name}
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300 filter sepia-[0.3] contrast-125 relative z-10"
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300 filter sepia-[0.1] contrast-110 relative z-10"
                 loading="lazy"
               />
               
