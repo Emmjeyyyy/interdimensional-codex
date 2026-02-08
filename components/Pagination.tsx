@@ -34,25 +34,25 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
   const pages = getPageNumbers();
 
   return (
-    <div className="flex justify-center items-center space-x-2 mt-12 py-6 border-t border-sci-frame/50 border-dashed">
+    <div className="flex justify-center items-center space-x-1 md:space-x-2 mt-8 md:mt-12 py-4 md:py-6 border-t border-sci-frame/50 border-dashed">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="p-3 bg-sci-panel border border-sci-frame text-sci-text hover:text-sci-accent hover:border-sci-accent disabled:opacity-30 disabled:hover:border-sci-frame bevel-btn transition-all active:translate-y-px"
+        className="p-2 md:p-3 bg-sci-panel border border-sci-frame text-sci-text hover:text-sci-accent hover:border-sci-accent disabled:opacity-30 disabled:hover:border-sci-frame bevel-btn transition-all active:translate-y-px"
         aria-label="Previous Page"
       >
-        <ChevronLeft size={20} />
+        <ChevronLeft size={20} className="w-4 h-4 md:w-5 md:h-5" />
       </button>
 
       <div className="flex space-x-1 overflow-x-auto max-w-[200px] sm:max-w-none scrollbar-hide px-2">
         {pages.map((page, index) => (
           page === -1 ? (
-            <span key={`ellipsis-${index}`} className="px-3 py-1 text-sci-frameLight font-mono self-center">...</span>
+            <span key={`ellipsis-${index}`} className="px-2 md:px-3 py-1 text-sci-frameLight font-mono self-center text-xs md:text-sm">...</span>
           ) : (
             <button
               key={page}
               onClick={() => onPageChange(page)}
-              className={`min-w-[40px] h-10 px-2 font-mono font-bold text-sm transition-all bevel-btn active:translate-y-px ${
+              className={`min-w-[32px] h-8 md:min-w-[40px] md:h-10 px-2 font-mono font-bold text-xs md:text-sm transition-all bevel-btn active:translate-y-px ${
                 currentPage === page
                   ? 'bg-sci-accent text-sci-base border border-sci-accent'
                   : 'bg-sci-panel text-sci-text border border-sci-frame hover:text-sci-accent hover:border-sci-accent'
@@ -67,10 +67,10 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="p-3 bg-sci-panel border border-sci-frame text-sci-text hover:text-sci-accent hover:border-sci-accent disabled:opacity-30 disabled:hover:border-sci-frame bevel-btn transition-all active:translate-y-px"
+        className="p-2 md:p-3 bg-sci-panel border border-sci-frame text-sci-text hover:text-sci-accent hover:border-sci-accent disabled:opacity-30 disabled:hover:border-sci-frame bevel-btn transition-all active:translate-y-px"
         aria-label="Next Page"
       >
-        <ChevronRight size={20} />
+        <ChevronRight size={20} className="w-4 h-4 md:w-5 md:h-5" />
       </button>
     </div>
   );

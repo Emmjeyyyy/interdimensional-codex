@@ -16,7 +16,7 @@ const App: React.FC = () => {
       <div className="min-h-screen bg-sci-base flex flex-col font-sans selection:bg-sci-accent selection:text-black">
         <Navbar />
         <div className="h-1 bg-gradient-to-r from-transparent via-sci-accent to-transparent opacity-30"></div>
-        <main className="flex-grow container mx-auto px-4 py-8 relative z-10">
+        <main className="flex-grow container mx-auto px-3 md:px-4 py-4 md:py-8 relative z-10">
           <Routes>
             <Route path="/" element={<Characters />} />
             <Route path="/characters" element={<Characters />} />

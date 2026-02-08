@@ -3,7 +3,7 @@ import React from 'react';
 export const CardSkeleton: React.FC = () => {
   return (
     <div className="bg-sci-frame p-1 rounded-sm">
-      <div className="bg-sci-screen border-4 border-sci-panel rounded-lg mb-2 h-64 overflow-hidden relative">
+      <div className="bg-sci-screen border-4 border-sci-panel rounded-lg mb-2 h-48 sm:h-64 overflow-hidden relative">
          <div className="w-full h-full bg-sci-panel animate-pulse opacity-50"></div>
          <div className="absolute inset-0 scanlines opacity-20"></div>
       </div>
@@ -57,7 +57,7 @@ export const CharacterDetailSkeleton: React.FC = () => {
     <div className="max-w-6xl mx-auto w-full animate-fade-in">
       <div className="h-5 w-32 bg-sci-frame/50 rounded mb-6 animate-pulse" />
       
-      <div className="bg-sci-panel border-2 border-sci-frame rounded-sm shadow-xl p-10 flex flex-col lg:flex-row gap-10">
+      <div className="bg-sci-panel border-2 border-sci-frame rounded-sm shadow-xl p-6 md:p-10 flex flex-col lg:flex-row gap-6 lg:gap-10">
          <div className="lg:w-1/3">
              <div className="aspect-square bg-sci-base border-2 border-sci-frame relative overflow-hidden mb-6">
                  <div className="absolute inset-0 bg-sci-frameLight/10 animate-pulse"></div>
@@ -84,7 +84,7 @@ export const LocationEpisodeDetailSkeleton: React.FC = () => {
     <div className="max-w-6xl mx-auto w-full animate-fade-in">
       <div className="h-5 w-32 bg-sci-frame/50 rounded mb-6 animate-pulse" />
 
-      <div className="bg-sci-panel border-2 border-sci-frame rounded-sm shadow-xl p-8 mb-8 h-48 relative">
+      <div className="bg-sci-panel border-2 border-sci-frame rounded-sm shadow-xl p-6 md:p-8 mb-8 h-48 relative">
           <div className="h-8 bg-sci-frameLight/20 w-1/2 mb-4 animate-pulse"></div>
           <div className="h-4 bg-sci-frameLight/10 w-1/4 animate-pulse"></div>
       </div>

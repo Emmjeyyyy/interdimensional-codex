@@ -73,26 +73,26 @@ const CharacterDetail: React.FC = () => {
       {/* Main Dossier Container */}
       <div className="bg-sci-panel border-2 border-sci-frame rounded-sm overflow-hidden shadow-2xl relative">
         {/* Top Secret Stamp */}
-        <div className="absolute top-4 right-4 z-10 opacity-20 rotate-12 border-4 border-sci-danger text-sci-danger p-2 font-black text-4xl uppercase tracking-widest pointer-events-none select-none">
+        <div className="absolute top-2 right-2 md:top-4 md:right-4 z-10 opacity-20 rotate-12 border-2 md:border-4 border-sci-danger text-sci-danger p-1 md:p-2 font-black text-xl md:text-4xl uppercase tracking-widest pointer-events-none select-none hidden sm:block">
             Classified
         </div>
 
         {/* Header Bar */}
-        <div className="bg-sci-frame border-b border-sci-frameLight px-6 py-3 flex justify-between items-center">
-             <div className="font-mono text-xs text-sci-text uppercase tracking-[0.2em]">Subject Dossier #{character.id}</div>
+        <div className="bg-sci-frame border-b border-sci-frameLight px-4 py-2 md:px-6 md:py-3 flex justify-between items-center">
+             <div className="font-mono text-[0.6rem] md:text-xs text-sci-text uppercase tracking-[0.2em]">Subject Dossier #{character.id}</div>
              <div className="flex gap-2">
-                 <div className="w-3 h-3 rounded-full bg-sci-danger animate-pulse"></div>
-                 <div className="w-3 h-3 rounded-full bg-sci-accent opacity-50"></div>
-                 <div className="w-3 h-3 rounded-full bg-sci-success opacity-50"></div>
+                 <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-sci-danger animate-pulse"></div>
+                 <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-sci-accent opacity-50"></div>
+                 <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-sci-success opacity-50"></div>
              </div>
         </div>
 
-        <div className="p-6 md:p-10 flex flex-col lg:flex-row gap-10">
+        <div className="p-5 md:p-10 flex flex-col lg:flex-row gap-6 lg:gap-10">
           
           {/* Left Col: Visuals */}
           <div className="lg:w-1/3 flex flex-col">
              {/* CRT Image Container */}
-             <div className="bg-sci-base p-4 border-2 border-sci-frame shadow-crt-inset mb-6 relative">
+             <div className="bg-sci-base p-2 md:p-4 border-2 border-sci-frame shadow-crt-inset mb-6 relative">
                <div className="relative overflow-hidden border border-sci-frameLight/30">
                  <div className="absolute inset-0 z-20 pointer-events-none scanlines opacity-40"></div>
                  <img 
@@ -127,12 +127,12 @@ const CharacterDetail: React.FC = () => {
 
           {/* Right Col: Data */}
           <div className="lg:w-2/3">
-             <h1 className="text-4xl md:text-5xl font-display font-bold text-sci-accent mb-2 uppercase tracking-tight text-glow">
+             <h1 className="text-3xl md:text-5xl font-display font-bold text-sci-accent mb-2 uppercase tracking-tight text-glow break-words">
                {character.name}
              </h1>
              <div className="h-px w-full bg-gradient-to-r from-sci-accent to-transparent mb-8 opacity-50"></div>
              
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-10">
                 
                 {/* Status Module */}
                 <div className="bg-sci-base border border-sci-frame p-4 relative overflow-hidden">
@@ -163,7 +163,7 @@ const CharacterDetail: React.FC = () => {
                         <span className="text-[0.6rem] text-sci-frameLight uppercase tracking-widest font-mono">Biological Classification</span>
                         <Zap className="w-4 h-4 text-sci-frameLight" />
                     </div>
-                    <div className="text-xl font-mono text-sci-text uppercase">
+                    <div className="text-xl font-mono text-sci-text uppercase truncate">
                         {character.species} <span className="text-sm opacity-50">//{character.gender}</span>
                     </div>
                 </div>
@@ -175,7 +175,7 @@ const CharacterDetail: React.FC = () => {
                         <MapPin className="w-4 h-4 text-sci-frameLight" />
                     </div>
                     {character.origin.url ? (
-                        <Link to={`/locations/${character.origin.url.split('/').pop()}`} className="text-lg font-mono text-sci-accent hover:underline hover:text-white transition-colors uppercase flex items-center">
+                        <Link to={`/locations/${character.origin.url.split('/').pop()}`} className="text-lg font-mono text-sci-accent hover:underline hover:text-white transition-colors uppercase flex items-center flex-wrap">
                         {character.origin.name} <span className="ml-2 text-xs border border-sci-accent px-1 rounded-sm">LINK</span>
                         </Link>
                     ) : (
@@ -190,7 +190,7 @@ const CharacterDetail: React.FC = () => {
                         <MapPin className="w-4 h-4 text-sci-frameLight" />
                     </div>
                     {character.location.url ? (
-                        <Link to={`/locations/${character.location.url.split('/').pop()}`} className="text-lg font-mono text-sci-accent hover:underline hover:text-white transition-colors uppercase flex items-center">
+                        <Link to={`/locations/${character.location.url.split('/').pop()}`} className="text-lg font-mono text-sci-accent hover:underline hover:text-white transition-colors uppercase flex items-center flex-wrap">
                         {character.location.name} <span className="ml-2 text-xs border border-sci-accent px-1 rounded-sm">LINK</span>
                         </Link>
                     ) : (
@@ -239,8 +239,8 @@ const CharacterDetail: React.FC = () => {
       {versions.length > 0 && (
         <div className="mt-12">
             <div className="flex items-center mb-6 text-sci-text border-b border-sci-frame pb-2">
-                <Users className="w-6 h-6 mr-3 text-sci-accent" />
-                <h2 className="text-xl font-display font-bold uppercase tracking-wider">Dimensional Variants Detected</h2>
+                <Users className="w-5 h-5 md:w-6 md:h-6 mr-3 text-sci-accent" />
+                <h2 className="text-lg md:text-xl font-display font-bold uppercase tracking-wider">Dimensional Variants Detected</h2>
                 <div className="ml-auto px-2 py-1 bg-sci-alert/20 text-sci-alert text-xs font-mono border border-sci-alert uppercase flex items-center">
                     <ShieldAlert className="w-3 h-3 mr-1" />
                     {versions.length} Matches

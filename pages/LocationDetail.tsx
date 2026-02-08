@@ -56,28 +56,28 @@ const LocationDetail: React.FC = () => {
 
       <div className="bg-sci-panel border-2 border-sci-frame rounded-sm shadow-xl overflow-hidden mb-8">
         {/* Header */}
-        <div className="bg-sci-frame border-b border-sci-frameLight px-6 py-3 flex justify-between items-center">
-             <div className="font-mono text-xs text-sci-text uppercase tracking-[0.2em]">Sector Data: {location.name}</div>
-             <div className="flex gap-2 text-sci-text font-mono text-xs">
+        <div className="bg-sci-frame border-b border-sci-frameLight px-4 py-2 md:px-6 md:py-3 flex justify-between items-center">
+             <div className="font-mono text-[0.6rem] md:text-xs text-sci-text uppercase tracking-[0.2em]">Sector Data: {location.name}</div>
+             <div className="flex gap-2 text-sci-text font-mono text-[0.6rem] md:text-xs">
                  COORD: {location.dimension === 'unknown' ? 'ERR-404' : location.dimension}
              </div>
         </div>
 
-        <div className="p-8 relative">
-            <div className="absolute right-10 top-10 opacity-10">
-                <PlanetIcon className="w-40 h-40 text-sci-accent animate-pulse" />
+        <div className="p-5 md:p-8 relative">
+            <div className="absolute right-4 top-4 md:right-10 md:top-10 opacity-10">
+                <PlanetIcon className="w-24 h-24 md:w-40 md:h-40 text-sci-accent animate-pulse" />
             </div>
 
             <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-6">
-                <div>
-                    <h1 className="text-4xl font-display font-bold text-sci-accent mb-2 uppercase text-glow">{location.name}</h1>
+                <div className="w-full md:w-auto">
+                    <h1 className="text-2xl md:text-4xl font-display font-bold text-sci-accent mb-2 uppercase text-glow break-words">{location.name}</h1>
                     <div className="flex flex-col gap-2 mt-4 font-mono text-sm text-sci-text uppercase">
-                        <div className="flex items-center">
-                            <span className="w-32 text-sci-frameLight">Type:</span>
+                        <div className="flex flex-col sm:flex-row sm:items-center">
+                            <span className="w-32 text-sci-frameLight mb-1 sm:mb-0">Type:</span>
                             <span className="text-white">{location.type}</span>
                         </div>
-                         <div className="flex items-center">
-                            <span className="w-32 text-sci-frameLight">Dimension:</span>
+                         <div className="flex flex-col sm:flex-row sm:items-center">
+                            <span className="w-32 text-sci-frameLight mb-1 sm:mb-0">Dimension:</span>
                             <span className="text-white">{location.dimension}</span>
                         </div>
                     </div>
@@ -90,7 +90,7 @@ const LocationDetail: React.FC = () => {
                     type: 'location', 
                     info: `${location.type} • ${location.dimension}` 
                     })}
-                    className={`flex items-center px-4 py-2 border font-mono uppercase text-sm bevel-btn transition-all ${
+                    className={`flex items-center px-4 py-2 border font-mono uppercase text-sm bevel-btn transition-all mt-2 md:mt-0 ${
                         favorited 
                         ? 'bg-sci-danger/20 border-sci-danger text-sci-danger' 
                         : 'bg-sci-base border-sci-frame text-sci-text hover:text-sci-danger hover:border-sci-danger'
@@ -104,9 +104,9 @@ const LocationDetail: React.FC = () => {
       </div>
 
       <div className="flex items-center mb-6 border-b border-sci-frame pb-2">
-        <Users className="w-6 h-6 mr-3 text-sci-accent" />
-        <h2 className="text-2xl font-display font-bold text-sci-text uppercase tracking-widest">Inhabitants</h2>
-        {location.residents.length > 20 && <span className="ml-4 font-mono text-xs text-sci-frameLight">(DATA STREAM TRUNCATED)</span>}
+        <Users className="w-5 h-5 md:w-6 md:h-6 mr-3 text-sci-accent" />
+        <h2 className="text-xl md:text-2xl font-display font-bold text-sci-text uppercase tracking-widest">Inhabitants</h2>
+        {location.residents.length > 20 && <span className="ml-4 font-mono text-xs text-sci-frameLight hidden sm:inline">(DATA STREAM TRUNCATED)</span>}
       </div>
 
       {residents.length > 0 ? (

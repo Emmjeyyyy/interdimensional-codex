@@ -89,19 +89,20 @@ const Episodes: React.FC = () => {
     <div>
       <div className="flex items-center justify-between mb-6 border-b border-sci-accent/30 pb-2">
         <div className="flex items-end">
-          <h1 className="text-4xl font-display font-bold text-sci-text uppercase tracking-widest">
+          <h1 className="text-2xl md:text-4xl font-display font-bold text-sci-text uppercase tracking-widest truncate max-w-[200px] md:max-w-none">
             {selectedSeason && !isSearchActive ? SEASONS.find(s => s.code === selectedSeason)?.name : 'Mission Logs'}
           </h1>
-          <span className="ml-4 font-mono text-sci-accent text-sm mb-2 opacity-70 hidden sm:inline">// ARCHIVAL FOOTAGE</span>
+          <span className="ml-4 font-mono text-sci-accent text-xs md:text-sm mb-1 md:mb-2 opacity-70 hidden sm:inline">// ARCHIVAL FOOTAGE</span>
         </div>
         
         {selectedSeason && !isSearchActive && (
           <button 
             onClick={handleBackToSeasons}
-            className="flex items-center text-sci-accent hover:text-white transition-colors font-mono text-xs uppercase border border-sci-accent px-3 py-1 bg-sci-accent/10"
+            className="flex items-center text-sci-accent hover:text-white transition-colors font-mono text-xs uppercase border border-sci-accent px-2 py-1 md:px-3 bg-sci-accent/10 whitespace-nowrap"
           >
-            <ArrowLeft className="w-3 h-3 mr-2" />
-            Return to Index
+            <ArrowLeft className="w-3 h-3 mr-1 md:mr-2" />
+            <span className="hidden sm:inline">Return to Index</span>
+            <span className="sm:hidden">Back</span>
           </button>
         )}
       </div>
@@ -115,9 +116,9 @@ const Episodes: React.FC = () => {
       {loading ? (
         <TextListSkeleton />
       ) : error ? (
-        <div className="flex flex-col items-center justify-center py-20 bg-sci-base border-2 border-dashed border-sci-danger/30 rounded-sm">
+        <div className="flex flex-col items-center justify-center py-20 bg-sci-base border-2 border-dashed border-sci-danger/30 rounded-sm mx-4 md:mx-0">
           <AlertCircle className="w-12 h-12 text-sci-danger mb-4 opacity-80" />
-          <p className="text-xl font-mono text-sci-danger uppercase tracking-widest">{error}</p>
+          <p className="text-xl font-mono text-sci-danger uppercase tracking-widest text-center px-4">{error}</p>
           {selectedSeason && !isSearchActive && (
             <button 
               onClick={handleBackToSeasons}

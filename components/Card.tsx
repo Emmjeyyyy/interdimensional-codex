@@ -84,8 +84,8 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
     <div className="group relative bg-sci-frame p-1 pb-2 rounded-sm shadow-xl hover:shadow-glow transition-shadow duration-300">
       <Link to={`/${type}s/${id}`} className="flex flex-col h-full">
         
-        {/* CRT Screen Container */}
-        <div className="relative bg-sci-screen border-4 border-sci-panel rounded-lg mb-2 overflow-hidden shadow-crt-inset h-64 flex flex-col items-center justify-center">
+        {/* CRT Screen Container - Responsive Height */}
+        <div className="relative bg-sci-screen border-4 border-sci-panel rounded-lg mb-2 overflow-hidden shadow-crt-inset h-48 sm:h-64 flex flex-col items-center justify-center transition-all">
           
           {/* Scanlines & Glare Overlay */}
           <div className="absolute inset-0 z-20 pointer-events-none scanlines opacity-50 mix-blend-overlay"></div>

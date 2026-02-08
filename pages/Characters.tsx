@@ -65,10 +65,10 @@ const Characters: React.FC = () => {
   return (
     <div>
       <div className="flex items-end mb-6 border-b border-sci-accent/30 pb-2">
-        <h1 className="text-4xl font-display font-bold text-sci-text uppercase tracking-widest">
+        <h1 className="text-2xl md:text-4xl font-display font-bold text-sci-text uppercase tracking-widest">
           Subjects
         </h1>
-        <span className="ml-4 font-mono text-sci-accent text-sm mb-2 opacity-70">// BIOLOGICAL DATABASE</span>
+        <span className="ml-4 font-mono text-sci-accent text-xs md:text-sm mb-1 md:mb-2 opacity-70">// BIOLOGICAL DATABASE</span>
       </div>
       
       <CharacterFilters 
@@ -79,9 +79,9 @@ const Characters: React.FC = () => {
       {loading ? (
         <ListSkeleton />
       ) : error ? (
-        <div className="flex flex-col items-center justify-center py-20 bg-sci-base border-2 border-dashed border-sci-danger/30 rounded-sm">
-          <AlertCircle className="w-16 h-16 text-sci-danger mb-4 opacity-80" />
-          <p className="text-xl font-mono text-sci-danger uppercase tracking-widest">{error}</p>
+        <div className="flex flex-col items-center justify-center py-20 bg-sci-base border-2 border-dashed border-sci-danger/30 rounded-sm mx-4 md:mx-0">
+          <AlertCircle className="w-12 h-12 md:w-16 md:h-16 text-sci-danger mb-4 opacity-80" />
+          <p className="text-lg md:text-xl font-mono text-sci-danger uppercase tracking-widest text-center px-4">{error}</p>
           <button 
             onClick={() => { setName(''); setSpecies(''); }}
             className="mt-6 px-4 py-2 bg-sci-danger/10 text-sci-danger border border-sci-danger font-mono text-xs hover:bg-sci-danger hover:text-black transition-colors"

@@ -23,16 +23,16 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-sci-panel border-b-4 border-sci-frame shadow-2xl z-50 sticky top-0">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-24">
+        <div className="flex justify-between items-center h-16 md:h-24 transition-all duration-300">
           {/* Logo Section */}
           <div className="flex items-center">
-            <NavLink to="/" className="flex items-center space-x-1">
-              <PortalIcon className="w-16 h-16 text-sci-accent drop-shadow-[0_0_5px_rgba(88,166,255,0.8)]" />
-              <div className="flex flex-col justify-center mt-1">
-                <span className="font-display font-black text-2xl text-sci-accent tracking-wider leading-none text-glow">
+            <NavLink to="/" className="flex items-center space-x-2 md:space-x-1">
+              <PortalIcon className="w-10 h-10 md:w-16 md:h-16 text-sci-accent drop-shadow-[0_0_5px_rgba(88,166,255,0.8)] transition-all duration-300" />
+              <div className="flex flex-col justify-center mt-0.5 md:mt-1">
+                <span className="font-display font-black text-lg md:text-2xl text-sci-accent tracking-wider leading-none text-glow transition-all duration-300">
                   INTERDIMENSIONAL CODEX
                 </span>
-                <span className="text-xs uppercase tracking-[0.4em] text-sci-text mt-1">
+                <span className="text-[0.6rem] md:text-xs uppercase tracking-[0.4em] text-sci-text mt-0.5 md:mt-1 transition-all duration-300">
                   classified database
                 </span>
               </div>
@@ -92,7 +92,7 @@ const Navbar: React.FC = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="group relative bg-transparent p-0 border-none cursor-pointer outline-none w-14 h-14"
+              className="group relative bg-transparent p-0 border-none cursor-pointer outline-none w-10 h-10"
               aria-label="Toggle menu"
               style={{ WebkitTapHighlightColor: 'transparent' }}
             >
@@ -105,7 +105,7 @@ const Navbar: React.FC = () => {
                     ? 'bg-sci-frameLight text-white shadow-glow -translate-y-[2px]' 
                     : 'bg-sci-frame text-sci-accent -translate-y-[4px]'
               }`}>
-                {isOpen ? <X size={28} /> : <Menu size={28} />}
+                {isOpen ? <X size={24} /> : <Menu size={24} />}
               </span>
             </button>
           </div>
@@ -116,7 +116,7 @@ const Navbar: React.FC = () => {
       {isOpen && (
         <div className="md:hidden bg-sci-panel border-b-2 border-sci-frame animate-scanline shadow-2xl relative z-40">
            <div className="absolute inset-0 bg-sci-base/90 backdrop-blur-sm -z-10"></div>
-          <div className="px-6 pt-6 pb-8 space-y-6">
+          <div className="px-4 pt-4 pb-6 space-y-4">
             {navItems.map((item) => (
               <NavLink
                 key={item.path}
@@ -128,7 +128,7 @@ const Navbar: React.FC = () => {
                 {({ isActive }) => {
                   const active = getIsActive(item.path, isActive);
                   return (
-                  <div className="h-14 w-full relative">
+                  <div className="h-12 w-full relative">
                     <span className={`absolute top-0 left-0 w-full h-full rounded-lg bg-black/40 blur-[2px] transition-transform duration-300 ${
                         active ? 'translate-y-[1px]' : 'translate-y-[3px]'
                     }`} />
@@ -137,10 +137,10 @@ const Navbar: React.FC = () => {
                           ? 'bg-[#1a4c7a]' 
                           : 'bg-[#1f242b]'
                     }`} />
-                    <span className={`absolute top-0 left-0 w-full h-full rounded-lg px-6 flex items-center font-display font-bold uppercase tracking-widest transition-all border-t border-white/10 ${
+                    <span className={`absolute top-0 left-0 w-full h-full rounded-lg px-4 flex items-center font-display font-bold uppercase tracking-widest transition-all border-t border-white/10 ${
                         active
                           ? 'bg-sci-accent text-sci-base shadow-[0_0_15px_rgba(88,166,255,0.4)] -translate-y-[1px]'
-                          : 'bg-sci-frame text-gray-400 -translate-y-[4px]'
+                          : 'bg-sci-frame text-gray-400 -translate-y-[3px]'
                     }`}>
                        <span className={`mr-4 ${active ? 'text-sci-base' : 'text-sci-accent'}`}>
                         {item.icon}
