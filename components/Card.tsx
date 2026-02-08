@@ -43,8 +43,8 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
                  
                  <button
                     onClick={handleFavoriteClick}
-                    className={`p-1.5 border border-sci-text/30 bg-black/60 hover:bg-sci-accent hover:text-black transition-colors ${
-                    favorited ? 'text-sci-danger border-sci-danger' : 'text-sci-text'
+                    className={`p-1.5 border border-sci-text/30 bg-black/60 transition-colors ${
+                    favorited ? 'text-sci-danger border-sci-danger' : 'text-sci-text hover:text-sci-danger hover:border-sci-danger'
                     }`}
                     aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
                 >
@@ -111,8 +111,8 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
           {/* Favorite Button (Hardware switch style) */}
           <button
             onClick={handleFavoriteClick}
-            className={`absolute top-2 right-2 z-30 p-1.5 border border-sci-text/30 bg-black/60 hover:bg-sci-accent hover:text-black transition-colors ${
-              favorited ? 'text-sci-danger border-sci-danger' : 'text-sci-text'
+            className={`absolute top-2 right-2 z-30 p-1.5 border border-sci-text/30 bg-black/60 transition-colors ${
+              favorited ? 'text-sci-danger border-sci-danger' : 'text-sci-text hover:text-sci-danger hover:border-sci-danger'
             }`}
             aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
           >

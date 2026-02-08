@@ -117,7 +117,7 @@ const CharacterDetail: React.FC = () => {
                className={`w-full py-3 flex items-center justify-center border font-mono uppercase tracking-wider text-sm transition-all bevel-btn active:translate-y-px ${
                  favorited 
                    ? 'bg-sci-danger/20 border-sci-danger text-sci-danger' 
-                   : 'bg-sci-frame border-sci-frameLight text-sci-text hover:text-white hover:bg-sci-frameLight'
+                   : 'bg-sci-frame border-sci-frameLight text-sci-text hover:text-sci-danger hover:border-sci-danger'
                }`}
              >
                <Crosshair className={`w-4 h-4 mr-2`} />

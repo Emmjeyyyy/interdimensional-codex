@@ -92,7 +92,7 @@ const LocationDetail: React.FC = () => {
                     className={`flex items-center px-4 py-2 border font-mono uppercase text-sm bevel-btn transition-all ${
                         favorited 
                         ? 'bg-sci-danger/20 border-sci-danger text-sci-danger' 
-                        : 'bg-sci-base border-sci-frame text-sci-text hover:text-white hover:border-sci-accent'
+                        : 'bg-sci-base border-sci-frame text-sci-text hover:text-sci-danger hover:border-sci-danger'
                     }`}
                 >
                     <Crosshair className={`w-4 h-4 mr-2`} />
