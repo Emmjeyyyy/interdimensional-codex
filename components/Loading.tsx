@@ -3,7 +3,7 @@ import React from 'react';
 export const CardSkeleton: React.FC = () => {
   return (
     <div className="bg-sci-frame p-1 rounded-sm">
-      <div className="bg-sci-screen border-4 border-sci-panel rounded-lg mb-2 h-48 sm:h-64 overflow-hidden relative">
+      <div className="bg-sci-screen border-4 border-sci-panel rounded-lg mb-2 h-72 sm:h-96 overflow-hidden relative">
          <div className="w-full h-full bg-sci-panel animate-pulse opacity-50"></div>
          <div className="absolute inset-0 scanlines opacity-20"></div>
       </div>
