@@ -25,6 +25,33 @@ export const ListSkeleton: React.FC<{ count?: number }> = ({ count = 8 }) => {
   );
 };
 
+export const TextCardSkeleton: React.FC = () => {
+  return (
+    <div className="bg-sci-frame p-1 rounded-sm h-[180px]">
+       <div className="bg-sci-panel border border-sci-frameLight h-full p-4 flex flex-col relative">
+          <div className="flex justify-between mb-4">
+             <div className="w-16 h-3 bg-sci-frameLight/20 animate-pulse"></div>
+             <div className="w-6 h-6 bg-sci-frameLight/20 animate-pulse"></div>
+          </div>
+          <div className="flex-grow flex flex-col justify-center items-center space-y-3">
+             <div className="w-3/4 h-6 bg-sci-frameLight/20 animate-pulse"></div>
+             <div className="w-1/2 h-3 bg-sci-frameLight/10 animate-pulse"></div>
+          </div>
+       </div>
+    </div>
+  );
+};
+
+export const TextListSkeleton: React.FC<{ count?: number }> = ({ count = 12 }) => {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {Array.from({ length: count }).map((_, i) => (
+        <TextCardSkeleton key={i} />
+      ))}
+    </div>
+  );
+};
+
 export const CharacterDetailSkeleton: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto w-full animate-fade-in">

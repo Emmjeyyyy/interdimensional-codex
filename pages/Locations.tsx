@@ -4,7 +4,7 @@ import { Location } from '../types';
 import Card from '../components/Card';
 import Pagination from '../components/Pagination';
 import { SimpleSearch } from '../components/Filters';
-import { ListSkeleton } from '../components/Loading';
+import { TextListSkeleton } from '../components/Loading';
 import { AlertCircle } from 'lucide-react';
 
 const Locations: React.FC = () => {
@@ -70,7 +70,7 @@ const Locations: React.FC = () => {
       />
 
       {loading ? (
-        <ListSkeleton />
+        <TextListSkeleton />
       ) : error ? (
         <div className="flex flex-col items-center justify-center py-20 bg-sci-base border-2 border-dashed border-sci-danger/30 rounded-sm">
           <AlertCircle className="w-16 h-16 text-sci-danger mb-4 opacity-80" />

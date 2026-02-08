@@ -21,6 +21,59 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
     toggleFavorite({ id, name, type, image, info: subtitle });
   };
 
+  const isTextOnly = type === 'location' || type === 'episode';
+
+  if (isTextOnly) {
+    return (
+      <div className="group relative bg-sci-frame p-1 rounded-sm shadow-xl hover:shadow-glow transition-shadow duration-300 h-full">
+        <Link to={`/${type}s/${id}`} className="flex flex-col h-full bg-sci-panel border border-sci-frameLight relative p-5 hover:bg-sci-panel/80 transition-colors">
+            
+            {/* Corner Screws */}
+            <div className="absolute top-1 left-1 w-1 h-1 rounded-full bg-sci-frameLight/50"></div>
+            <div className="absolute top-1 right-1 w-1 h-1 rounded-full bg-sci-frameLight/50"></div>
+            <div className="absolute bottom-1 left-1 w-1 h-1 rounded-full bg-sci-frameLight/50"></div>
+            <div className="absolute bottom-1 right-1 w-1 h-1 rounded-full bg-sci-frameLight/50"></div>
+
+            {/* Header: ID & Favorite */}
+            <div className="flex justify-between items-start mb-4 relative z-10">
+                 <div className="flex items-center space-x-2">
+                    <div className={`w-1.5 h-1.5 rounded-full ${favorited ? 'bg-sci-danger shadow-[0_0_5px_rgba(248,81,73,0.8)]' : 'bg-sci-success/50'}`}></div>
+                    <span className="text-[0.6rem] uppercase text-sci-text tracking-widest font-mono">REC-{id.toString().padStart(4, '0')}</span>
+                 </div>
+                 
+                 <button
+                    onClick={handleFavoriteClick}
+                    className={`p-1.5 border border-sci-text/30 bg-black/60 hover:bg-sci-accent hover:text-black transition-colors ${
+                    favorited ? 'text-sci-danger border-sci-danger' : 'text-sci-text'
+                    }`}
+                    aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
+                >
+                    <Heart className={`w-3.5 h-3.5 ${favorited ? 'fill-current' : ''}`} />
+                </button>
+            </div>
+
+            {/* Main Content */}
+            <div className="flex-grow flex flex-col justify-center text-center space-y-3">
+                 <h3 className="font-display font-bold text-lg text-sci-accent uppercase group-hover:text-white transition-colors leading-tight break-words">
+                    {name}
+                 </h3>
+                 <div className="flex justify-center">
+                    <div className="w-8 h-px bg-sci-frameLight/50"></div>
+                 </div>
+                 <p className="text-xs text-sci-text font-mono uppercase tracking-tight line-clamp-2">
+                    {subtitle}
+                 </p>
+            </div>
+            
+             {/* Decorative Footer */}
+            <div className="absolute bottom-0 left-0 w-full h-0.5 bg-sci-frameLight/10 overflow-hidden">
+                <div className="h-full bg-sci-accent/40 w-full transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+            </div>
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div className="group relative bg-sci-frame p-1 pb-2 rounded-sm shadow-xl hover:shadow-glow transition-shadow duration-300">
       <Link to={`/${type}s/${id}`} className="flex flex-col h-full">

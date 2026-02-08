@@ -4,7 +4,7 @@ import { Episode } from '../types';
 import Card from '../components/Card';
 import Pagination from '../components/Pagination';
 import { SimpleSearch } from '../components/Filters';
-import { ListSkeleton } from '../components/Loading';
+import { TextListSkeleton } from '../components/Loading';
 import { AlertCircle, ArrowLeft, Disc } from 'lucide-react';
 
 const SEASONS = [
@@ -113,7 +113,7 @@ const Episodes: React.FC = () => {
       />
 
       {loading ? (
-        <ListSkeleton />
+        <TextListSkeleton />
       ) : error ? (
         <div className="flex flex-col items-center justify-center py-20 bg-sci-base border-2 border-dashed border-sci-danger/30 rounded-sm">
           <AlertCircle className="w-12 h-12 text-sci-danger mb-4 opacity-80" />
