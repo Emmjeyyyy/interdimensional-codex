@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
                     {/* Front Layer (Face) */}
                     <span className={`relative block rounded-lg px-6 py-3 font-display text-sm tracking-widest uppercase transition-all duration-300 ease-out flex items-center justify-center border-t border-white/20 ${
                       active
-                        ? 'bg-sci-accent text-sci-base font-black shadow-[0_0_25px_rgba(88,166,255,0.6)] -translate-y-[2px]'
+                        ? 'bg-sci-accent text-sci-base font-black shadow-[0_0_12px_rgba(88,166,255,0.3)] -translate-y-[2px]'
                         : 'bg-sci-frame text-gray-400 -translate-y-[6px]'
                     }`}>
                       <span className={`mr-2.5 transition-colors duration-300 ${
@@ -102,7 +102,7 @@ const Navbar: React.FC = () => {
               <span className="absolute top-0 left-0 w-full h-full rounded-lg bg-[#1f242b]" />
               <span className={`relative block w-full h-full rounded-lg border-t border-white/10 flex items-center justify-center transition-all duration-300 ${
                   isOpen 
-                    ? 'bg-sci-frameLight text-white shadow-glow -translate-y-[2px]' 
+                    ? 'bg-sci-frameLight text-white shadow-[0_0_8px_rgba(88,166,255,0.25)] -translate-y-[2px]' 
                     : 'bg-sci-frame text-sci-accent -translate-y-[4px]'
               }`}>
                 {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -139,7 +139,7 @@ const Navbar: React.FC = () => {
                     }`} />
                     <span className={`absolute top-0 left-0 w-full h-full rounded-lg px-4 flex items-center font-display font-bold uppercase tracking-widest transition-all border-t border-white/10 ${
                         active
-                          ? 'bg-sci-accent text-sci-base shadow-[0_0_15px_rgba(88,166,255,0.4)] -translate-y-[1px]'
+                          ? 'bg-sci-accent text-sci-base shadow-[0_0_8px_rgba(88,166,255,0.25)] -translate-y-[1px]'
                           : 'bg-sci-frame text-gray-400 -translate-y-[3px]'
                     }`}>
                        <span className={`mr-4 ${active ? 'text-sci-base' : 'text-sci-accent'}`}>
