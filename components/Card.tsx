@@ -57,7 +57,7 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
             <div className="flex-grow flex flex-col justify-center text-center space-y-3">
                  {type === 'location' && (
                     <div className="flex justify-center">
-                        <PlanetIcon className="w-[50px] h-[50px] text-sci-accent opacity-60" />
+                        <PlanetIcon className="w-[150px] h-[150px] text-sci-accent opacity-60" />
                     </div>
                  )}
                  <h3 className="font-display font-bold text-lg text-sci-accent uppercase group-hover:text-white transition-colors leading-tight break-words">
