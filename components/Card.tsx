@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Crosshair, Activity } from 'lucide-react';
+import { Crosshair, Activity, Globe } from 'lucide-react';
 import { useFavorites } from '../hooks/useFavorites';
 
 interface CardProps {
@@ -10,37 +10,6 @@ interface CardProps {
   image?: string;
   subtitle: string;
 }
-
-const GridPlanetIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    strokeLinecap="round" 
-    strokeLinejoin="round"
-  >
-    {/* Main Circle */}
-    <circle cx="12" cy="12" r="10" strokeWidth="1.5" />
-    
-    {/* Equator & Prime Meridian */}
-    <path d="M2 12h20" strokeWidth="1.5" />
-    <path d="M12 2v20" strokeWidth="1.5" />
-    
-    {/* Latitudes */}
-    <path d="M2.5 7h19" strokeWidth="1" opacity="0.8" />
-    <path d="M2.5 17h19" strokeWidth="1" opacity="0.8" />
-    <path d="M6 3.5h12" strokeWidth="1" opacity="0.5" />
-    <path d="M6 20.5h12" strokeWidth="1" opacity="0.5" />
-
-    {/* Longitudes */}
-    <path d="M12 2c2.2 0 5 4 5 10s-2.8 10-5 10" strokeWidth="1" opacity="0.8" />
-    <path d="M12 2c4.5 0 8 4 8 10s-3.5 10-8 10" strokeWidth="1" opacity="0.5" />
-    <path d="M12 2c-2.2 0-5 4-5 10s2.8 10 5 10" strokeWidth="1" opacity="0.8" />
-    <path d="M12 2c-4.5 0-8 4-8 10s3.5 10 8 10" strokeWidth="1" opacity="0.5" />
-  </svg>
-);
 
 const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -87,7 +56,7 @@ const Card: React.FC<CardProps> = ({ id, name, type, image, subtitle }) => {
             <div className="flex-grow flex flex-col justify-center text-center space-y-3">
                  {type === 'location' && (
                     <div className="flex justify-center">
-                        <GridPlanetIcon className="w-12 h-12 text-sci-accent opacity-60" />
+                        <Globe className="w-12 h-12 text-sci-accent opacity-60" strokeWidth={1.5} />
                     </div>
                  )}
                  <h3 className="font-display font-bold text-lg text-sci-accent uppercase group-hover:text-white transition-colors leading-tight break-words">
